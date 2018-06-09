@@ -36,7 +36,7 @@ class CQCode{
     }
 
     public static function Record($file){
-        return self::CQ('image', ['file' => $file]);
+        return self::CQ('record', ['file' => $file]);
     }
 
     public static function Rps($type){
@@ -47,12 +47,12 @@ class CQCode{
         return self::CQ('dice', ['type' => $type]);
     }
     
-    public static function Shake($type){
+    public static function Shake(){
         return self::CQ('shake');
     }
 
-    public static function Anonymouse($ignore){
-        return $ignore?self::CQ('anonymouse', ['ignore' => 'true']):self::CQ('anonymouse');
+    public static function Anonymous($ignore){
+        return $ignore?self::CQ('anonymous', ['ignore' => 'true']):self::CQ('anonymous');
     }
 
     public static function Music($type, $id){
@@ -62,14 +62,14 @@ class CQCode{
         ]);
     }
 
-    public static function DiyMusic($type = custom, $audio, $url, $title, $content, $image){
+    public static function CustomMusic($type = custom, $audio, $url, $title, $content, $image){
         return self::CQ('music', [
             'type' => 'custom',
-            'audio' =>$audio,
-            'url' =>$url,
-            'title' =>$title,
-            'content' =>$content,
-            'image' =>$image
+            'audio' => $audio,
+            'url' => $url,
+            'title' => $title,
+            'content' => $content,
+            'image' => $image
         ]);
     }
 
