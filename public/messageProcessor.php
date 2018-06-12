@@ -7,5 +7,4 @@ if(preg_match('/^(['.config('prefix', '!').'])/', $Event['message'], $prefix)){
     //TODO 交给中间件处理
 }
 
-
 ?>

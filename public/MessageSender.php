@@ -34,7 +34,3 @@ class MessageSender{
     }
 
 }
-
-
-
-?>
