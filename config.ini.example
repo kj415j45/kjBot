@@ -1,0 +1,7 @@
+API=127.0.0.1:5700
+token=
+prefix=!
+master=919815238
+allowFriends=true
+allowGroups=true
+WelcomeMsg=感谢您添加 kjBot 为好友，发送 !help 查看帮助列表
