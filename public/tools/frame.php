@@ -122,8 +122,7 @@ function parseCommand($str){
 
 function nextArg(){
     global $Command;
-    static $index=-1;
+    static $index=0;
 
-    $index++;
-    return $Command[$index];
+    return $Command[$index++];
 }
