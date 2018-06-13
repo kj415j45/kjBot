@@ -1,7 +1,6 @@
 <?php
 namespace kjBot\Frame;
 
-use Message;
 class MessageSender{
     
     public $CQ;
