@@ -7,7 +7,7 @@ if(preg_match('/^(['.config('prefix', '!').'])/', $Event['message'], $prefix)){
     }catch(kjBot\Frame\UnauthorizedException $e){
         $Queue[]= sendBack($e->getMessage());
     }catch(\Exception $e){
-        
+        //也许还有其他异常，但是这里不适合再抛出
     }
 }else{ //不是命令
     //TODO 交给中间件处理
