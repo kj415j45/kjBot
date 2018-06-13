@@ -1,6 +1,6 @@
 <?php
 
-global $Event, $Queue, $Command;
+global $Event, $Queue;
 requireMaster();
 
 do{
