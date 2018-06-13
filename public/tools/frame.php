@@ -39,7 +39,7 @@ function sendBack($msg, $auto_escape = false, $async = false){
  * @param $pending 是否追加写入（默认不追加）
  */
 function setData($filePath, $data, $pending = false){
-    mkdir(dirname($filePath), 777, true);
+    if(!file_exists(dirname('../storage/data/'.$filePath))) mkdir(dirname('../storage/data/'.$filePath), 666, true);
     return file_put_contents('../storage/data/'.$filePath, $data, $pending?(FILE_APPEND | LOCK_EX):LOCK_EX);
 }
 
@@ -97,7 +97,10 @@ function loadModule($module){
     if(file_exists('../module/'.$moduleFile)){
         require('../module/'.$moduleFile);
     }else{
-        throw new \Exception('No such module');
+        global $Event, $Queue;
+        if(!isset($Event['group_id'])){
+            $Queue[]= sendBack('没有该命令：'.$module);
+        }
     }
 }
 
@@ -118,6 +121,18 @@ function parseCommand($str){
         $cmd[] = empty($s) ? $exp_list['u'][$id] : $exp_list['v'][$id];
     }
     return $cmd;
+}
+
+function isMaster(){
+    global $Event;
+
+    return $Event['user_id']==config('master');
+}
+
+function requireMaster(){
+    if(!isMaster()){
+        throw new kjBot\Frame\UnauthorizedException();
+    }
 }
 
 function nextArg(){

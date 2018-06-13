@@ -5,7 +5,7 @@ class CQCode{
     public static function CQ($type, $argArray = NULL){
         $code='[CQ:'.$type;
         if(NULL !== $argArray) foreach($argArray as $key => $value){
-            $code.=','.$key.'='.self::EncodeCQCode($value);
+            $code.= (','.$key.'='.self::EncodeCQCode($value));
         }
         $code.=']';
         return $code;
@@ -93,6 +93,20 @@ class CQCode{
             '&#91;',
             '&#93;',
             '&#44;',
+        ], $str);
+    }
+
+    public static function DecodeCQCode($str){
+        return str_replace([
+            '&amp;',
+            '&#91;',
+            '&#93;',
+            '&#44;',
+        ],[
+            '&',
+            '[',
+            ']',
+            ',',
         ], $str);
     }
 
