@@ -7,10 +7,8 @@ if(preg_match('/^(['.config('prefix', '!').'])/', $Event['message'], $prefix)){
     $Command = parseCommand(substr($Event['message'], strlen($prefix[1])-1, $length));
     try{
         loadModule(substr(nextArg(), strlen($prefix[1])));
-    }catch(kjBot\Frame\UnauthorizedException $e){
-        $Queue[]= sendBack($e->getMessage());
     }catch(\Exception $e){
-        throw $e;
+        $Queue[]= sendBack($e->getMessage());
     }
 }else{ //不是命令
     //TODO 交给中间件处理

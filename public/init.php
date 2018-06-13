@@ -2,7 +2,6 @@
 
 require('Message.php');
 require('MessageSender.php');
-require('UnauthorizedException.php');
 require('../SDK/Autoload.php');
 require('tools/Autoload.php');
 use kjBot\SDK\CoolQ;
