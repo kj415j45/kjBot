@@ -97,7 +97,10 @@ function loadModule($module){
     if(file_exists('../module/'.$moduleFile)){
         require('../module/'.$moduleFile);
     }else{
-        throw new \Exception('No such module');
+        global $Event, $Queue;
+        if(!isset($Event['group_id'])){
+            $Queue[]= '没有该命令：'.$module;
+        }
     }
 }
 
@@ -118,6 +121,18 @@ function parseCommand($str){
         $cmd[] = empty($s) ? $exp_list['u'][$id] : $exp_list['v'][$id];
     }
     return $cmd;
+}
+
+function isMaster(){
+    global $Event;
+
+    return $Event['user_id']==config('master');
+}
+
+function requireMaster(){
+    if(!isMaster()){
+        throw new kjBot\Frame\UnauthorizedException();
+    }
 }
 
 function nextArg(){
