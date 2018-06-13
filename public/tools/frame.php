@@ -80,6 +80,10 @@ function clearCache(){
     closedir($cacheDir);
 }
 
+function sendImg($str){
+    return CQCode::Image('base64://'.base64_encode($path));
+}
+
 /**
  * 装载模块
  */
