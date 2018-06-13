@@ -4,6 +4,7 @@ require('Message.php');
 require('MessageSender.php');
 require('../SDK/Autoload.php');
 require('tools/Autoload.php');
+require('../vendor/autoload.php');
 use kjBot\SDK\CoolQ;
 use kjBot\SDK\CQCode;
 use kjBot\Frame\MessageSender;
