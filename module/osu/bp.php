@@ -13,6 +13,18 @@ do{
         case '-user':
             $user = nextArg();
             break;
+        case '-std':
+            $mode = OsuMode::std;
+            break;
+        case '-taiko':
+            $mode = OsuMode::taiko;
+            break;
+        case '-ctb':
+            $mode = OsuMode::ctb;
+            break;
+        case '-mania':
+            $mode = OsuMode::mania;
+            break;
         default:
 
     }
