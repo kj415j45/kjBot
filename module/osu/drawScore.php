@@ -47,7 +47,7 @@ function drawScore($recent, $map, $u){
     //Rank
     ->insert(Image::make($here.$recent['rank'].'.png'), 'top-left', 580, 210)
     //MOD
-    ->insert(getModImage(praseMod($recent['enabled_mods'])), 'buttom', 618, 302)
+    ->insert(getModImage(praseMod($recent['enabled_mods'])), 'top', 640, 302)
     //分数
     ->text(number_format($recent['score']), 640, 375, imageFont($venera, $recent['score']>1000000?55:60, $pink, 'center', 'buttom'))
     //四维
