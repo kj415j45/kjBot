@@ -1,4 +1,4 @@
-<?
+<?php
 
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -7,7 +7,7 @@ class OsuMode{
     const taiko = 1;
     const ctb = 2;
     const mania =3;
-}
+};
 
 function praseMod($mod){
     $list=NULL;
@@ -39,12 +39,25 @@ function ACCof($m){
 }
 
 function getBG($map){
-    $bg = Image::make('https://bloodcat.com/osu/i/'.$map)->resize(1280, 720);
+    try{
+        $bg = Image::make('https://bloodcat.com/osu/i/'.$map)->resize(1280, 720);
+    }catch(\Exception $e){
+        return Image::make(__DIR__.'/bg.jpg')->resize(1280, 720); //Fallback 背景
+    }
     return $bg;
 }
 
+function getModString($mod){
+    $mods=NULL;
+    $modList=array_keys(praseMod($mod));
+    for($i=0;$i<count($modList);$i++){
+        $mods.=$modList[$i];
+    }
+    return $mods;
+}
+
 function getPP($map, $stat){
-    $mods=getMODstring($stat['enabled_mods']);
+    $mods=getModString($stat['enabled_mods']);
     exec("curl https://osu.ppy.sh/osu/{$map} | oppai - ".(null!=$mods?"+{$mods}":'')." {$stat['count100']}x100 {$stat['count50']}x50 {$stat['countmiss']}m {$stat['maxcombo']}x -ojson", $result);
     $result=json_decode($result[0], true);
     return [
@@ -53,15 +66,6 @@ function getPP($map, $stat){
         'spd'=>sprintf('%.2f', $result['speed_pp']),
         'acc'=>sprintf('%.2f', $result['acc_pp']),
     ];
-}
-
-function getMODstring($mod){
-    $mods=NULL;
-    $modList=array_keys(praseMod($mod));
-    for($i=0;$i<count($modList);$i++){
-        $mods.=$modList[$i];
-    }
-    return $mods;
 }
 
 function getModImages($list){
@@ -73,35 +77,71 @@ function getModImages($list){
     return $imgs;
 }
 
+function getModImage($list){
+    $modImages = getModImages($list);
+    $countImg = count($modImages);
+    
+    if($countImg === 0){
+        return Image::canvas(1,1);
+    }
+
+    $modImage = Image::canvas(45*$countImg, 32);
+
+    for($i = 0 ; $i<$countImg ; $i++){
+        $modImage->insert($modImages[$i], 'top-left', $i*45, 0);
+    }
+
+    return $modImage;
+}
+
+function getFCPP($map, $stat){
+    $mods=getModString($stat['enabled_mods']);
+    exec("curl https://osu.ppy.sh/osu/{$map} | oppai - ".(null!=$mods?"+{$mods}":'')." {$acc} 0m -ojson", $result);
+    return sprintf('%.2f', json_decode($result[0], true)['pp']);
+}
+
 function getSSPP($map, $stat){
-    $mods=getMODstring($stat['enabled_mods']);
+    $acc = ACCof($stat);
+    $mods=getModString($stat['enabled_mods']);
     exec("curl https://osu.ppy.sh/osu/{$map} | oppai - ".(null!=$mods?"+{$mods}":'')." 100% -ojson", $result);
     return sprintf('%.2f', json_decode($result[0], true)['pp']);
 }
 
 function get_user_recent($k, $u, $m = OsuMode::std){
     $u=urlencode($u);
-    return json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_recent?k={$k}&u={$u}&m={$m}"), true)[0];
+    $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_recent?k={$k}&u={$u}&m={$m}"), true)[0];
+    if(NULL === $result){
+        throw new \Exception('玩家最近没有成绩');
+    }
+    return $result;
 }
 
 function get_user_best($k, $u, $bp, $m = OsuMode::std){
     $u=urlencode($u);
-    return json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_best?k={$k}&u={$u}&limit={$bp}&m={$m}"), true)[$bp-1];
+    $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_best?k={$k}&u={$u}&limit={$bp}&m={$m}"), true)[$bp-1];
+    if(NULL === $result){
+        throw new \Exception('没有这个bp');
+    }
+    return $result;
 }
 
 function get_user($k, $u, $m = OsuMode::std){
     $u=urlencode($u);
-    return json_decode(file_get_contents("https://osu.ppy.sh/api/get_user?k={$k}&u={$u}&m={$m}"), true)[0];
+    $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user?k={$k}&u={$u}&m={$m}"), true)[0];
+    if(NULL === $result){
+        throw new \Exception('无效的 osu! ID，请检查用户名是否正确（或者被 ban 了');
+    }
+    return $result;
 }
 
 function get_map($id, $mod){
-    $mods=getMODstring($mod);
+    $mods=getModString($mod);
     exec("curl https://osu.ppy.sh/osu/{$id} | oppai - -ojson ".(null!=$mods?"+{$mods}":''), $result);
     return json_decode($result[0], true);
 }
 
-function getBindOsuID($qq){
-    return rtrim(getData("osu/id/{$qq}"));
+function getOsuID($qq){
+    return rtrim(getData('osu/id/'.$qq));
 }
 
-?>
+loadModule('osu.drawScore');

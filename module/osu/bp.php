@@ -5,21 +5,13 @@ loadModule('osu.init');
 
 do{
     $arg = nextArg();
+    if(preg_match('/-(\d{1,3})/', $arg, $result)){
+        $x = $result[1];
+        coutinue;
+    }
     switch($arg){
         case '-user':
             $user = nextArg();
-            break;
-        case '-std':
-            $mode = OsuMode::std;
-            break;
-        case '-taiko':
-            $mode = OsuMode::taiko;
-            break;
-        case '-ctb':
-            $mode = OsuMode::ctb;
-            break;
-        case '-mania':
-            $mode = OsuMode::mania;
             break;
         default:
 
@@ -36,17 +28,13 @@ if($osuUser !== false){
         $u = $user;
     }
 }
-$osuMode = getData("osu/mode/{$Event['user_id']}");
-$m = $mode??$osuMode;
 
-$recent = get_user_recent($osu_api_key, $u, $mode);
-$map = get_map($recent['beatmap_id'], $recent['enabled_mods']);
-$map['beatmap_id'] = $recent['beatmap_id'];
+$bp = get_user_best($osu_api_key, $u, $x);
+$map = get_map($bp['beatmap_id'], $bp['enabled_mods']);
+$map['beatmap_id'] = $bp['beatmap_id'];
 
-$img = drawScore($recent, $map, $u);
-
+$img = drawScore($bp, $map, $u);
 $img->save('../storage/cache/'.$Event['message_id']);
-
 $Queue[]= sendBack(sendImg(getCache($Event['message_id'])));
 
 ?>

@@ -81,7 +81,7 @@ function clearCache(){
 }
 
 function sendImg($str){
-    return CQCode::Image('base64://'.base64_encode($path));
+    return kjBot\SDK\CQCode::Image('base64://'.base64_encode($str));
 }
 
 /**
