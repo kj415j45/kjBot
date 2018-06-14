@@ -80,6 +80,10 @@ function clearCache(){
     closedir($cacheDir);
 }
 
+function sendImg($str){
+    return kjBot\SDK\CQCode::Image('base64://'.base64_encode($str));
+}
+
 /**
  * 装载模块
  */

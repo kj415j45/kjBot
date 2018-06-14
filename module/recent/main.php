@@ -1,0 +1,3 @@
+<?php
+loadModule('osu.recent');
+?>

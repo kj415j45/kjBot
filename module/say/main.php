@@ -17,8 +17,11 @@ do{
     }
 }while($arg !== NULL);
 
-$Queue[]= sendBack(
-          substr($Event['message'], strpos($Event['message'], "\n")+1)
-          , $escape, $async);
+$index = strpos($Event['message'], "\n");
+if($index !== false){
+    $Queue[]= sendBack(
+        substr($Event['message'], $index+1)
+        , $escape, $async);
+}
 
 ?>
