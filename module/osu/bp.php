@@ -1,7 +1,7 @@
 <?php
 
 global $Event, $Queue, $osu_api_key;
-loadModule('osu.init');
+loadModule('osu.tools');
 
 do{
     $arg = nextArg();
@@ -31,17 +31,17 @@ do{
 }while($arg !== NULL);
 
 $osuUser = getOsuID($Event['user_id']);
-if($osuUser !== false){
+if($osuUser !== ''){
     $u = $user??$osuUser;
 }else{
     if($user == NULL){
-        throw \Exception('未绑定 osu!，且未指定用户');
+        throw new \Exception('未绑定 osu!，且未指定用户');
     }else{
         $u = $user;
     }
 }
 
-$bp = get_user_best($osu_api_key, $u, $x);
+$bp = get_user_best($osu_api_key, $u, $x, $mode);
 $map = get_map($bp['beatmap_id'], $bp['enabled_mods']);
 $map['beatmap_id'] = $bp['beatmap_id'];
 

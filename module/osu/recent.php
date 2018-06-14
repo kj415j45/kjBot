@@ -27,11 +27,11 @@ do{
 }while($arg !== NULL);
 
 $osuUser = getOsuID($Event['user_id']);
-if($osuUser !== false){
+if($osuUser !== ''){
     $u = $user??$osuUser;
 }else{
     if($user == NULL){
-        throw \Exception('未绑定 osu!，且未指定用户');
+        throw new \Exception('未绑定 osu!，且未指定用户');
     }else{
         $u = $user;
     }

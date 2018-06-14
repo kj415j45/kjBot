@@ -158,8 +158,8 @@ function setOsuID($qq, $id){
     global $osu_api_key;
     get_user($osu_api_key, $id);
     $setID = getOsuID($qq);
-    if($setID===false){
-        return setData('osu/id'.$qq, $id);
+    if($setID === ''){
+        return setData('osu/id/'.$qq, $id);
     }else{
         throw new \Exception('已经绑定了 '.$setID."\n".'需要改绑请联系 '.config('master'));
     }
