@@ -1,7 +1,7 @@
 <?php
 
 global $Event, $Queue, $osu_api_key;
-loadModule('osu.init');
+loadModule('osu.tools');
 
 do{
     $arg = nextArg();

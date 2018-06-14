@@ -1,5 +1,9 @@
 <?php
 
+global $osu_api_key, $osu;
+$osu='https://osu.ppy.sh';
+$osu_api_key=rtrim(getData('osu_api_key'));
+
 use Intervention\Image\ImageManagerStatic as Image;
 
 class OsuMode{
@@ -134,14 +138,31 @@ function get_user($k, $u, $m = OsuMode::std){
     return $result;
 }
 
+function get_beatmap($k, $b){
+    return json_decode(file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k={$k}&b={$b}"), true)[0];
+}
+
 function get_map($id, $mod){
+    global $osu_api_key;
+    $map = get_beatmap($osu_api_key, $id);
     $mods=getModString($mod);
     exec("curl https://osu.ppy.sh/osu/{$id} | oppai - -ojson ".(null!=$mods?"+{$mods}":''), $result);
-    return json_decode($result[0], true);
+    return array_merge($map, json_decode($result[0], true));
 }
 
 function getOsuID($qq){
     return rtrim(getData('osu/id/'.$qq));
+}
+
+function setOsuID($qq, $id){
+    global $osu_api_key;
+    get_user($osu_api_key, $id);
+    $setID = getOsuID($qq);
+    if($setID===false){
+        return setData('osu/id'.$qq, $id);
+    }else{
+        throw new \Exception('已经绑定了 '.$setID."\n".'需要改绑请联系 '.config('master'));
+    }
 }
 
 loadModule('osu.drawScore');
