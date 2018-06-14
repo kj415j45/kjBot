@@ -4,4 +4,4 @@
 mkdir storage/
 mkdir storage/data/
 mkdir storage/cache/
-chmod -R 666 storage/
+chmod -R 777 storage/
