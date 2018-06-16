@@ -1,6 +1,6 @@
 <?php
 
-global $Event;
+global $Queue;
 $msg=<<<EOT
 可用命令：
 checkin
