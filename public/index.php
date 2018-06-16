@@ -7,7 +7,7 @@ use kjBot\Frame\Message;
 try{
     switch($Event['post_type']){
         case 'message':
-        case 'notice':
+        case 'event':
         case 'request':
             require($Event['post_type'].'Processor.php');
             break;
