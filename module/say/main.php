@@ -1,6 +1,6 @@
 <?php
 
-global $Event, $Queue;
+global $Event, $Queue, $Text;
 requireMaster();
 
 do{
@@ -17,11 +17,6 @@ do{
     }
 }while($arg !== NULL);
 
-$index = strpos($Event['message'], "\n");
-if($index !== false){
-    $Queue[]= sendBack(
-        substr($Event['message'], $index+1)
-        , $escape, $async);
-}
+$Queue[]= sendBack($Text);
 
 ?>

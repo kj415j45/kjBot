@@ -40,8 +40,10 @@ if($osuUser !== ''){
         $u = $user;
     }
 }
+$osuMode = rtrim(getData("osu/mode/{$Event['user_id']}"));
+$m = $mode??$osuMode;
 
-$bp = get_user_best($osu_api_key, $u, $x, $mode);
+$bp = get_user_best($osu_api_key, $u, $x, $m);
 $map = get_map($bp['beatmap_id'], $bp['enabled_mods']);
 $map['beatmap_id'] = $bp['beatmap_id'];
 
