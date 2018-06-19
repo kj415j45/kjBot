@@ -23,6 +23,11 @@ try{
         );
     }
 
+}catch(\Exception $e){
+    $Queue[]= new Message(var_dump($Event).$e.$e->getCode(), config('master'), false, true, true);
+}
+
+try{
     //将队列中的消息发出
     foreach($Queue as $msg){
         $MsgSender->send($msg);
@@ -30,5 +35,7 @@ try{
 }catch(\Exception $e){
     setData('error.log', var_dump($Event).$e.$e->getCode(), true);
 }
+
+
 
 ?>
