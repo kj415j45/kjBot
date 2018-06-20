@@ -1,5 +1,7 @@
 {
     "require": {
-        "intervention/image": "^2.4"
+        "intervention/image": "^2.4",
+        "knplabs/github-api": "^2.8",
+        "php-http/guzzle6-adapter": "^1.1"
     }
 }

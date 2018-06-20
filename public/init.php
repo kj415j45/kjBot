@@ -19,4 +19,7 @@ $MsgSender = new MessageSender($CQ);
 $Debug = ('true'===config('DEBUG', 'false'))?true:false;
 $DebugListen = config('DebugListen', config('master'));
 
+$Github = new \Github\Client();
+$Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);
+
 ?>

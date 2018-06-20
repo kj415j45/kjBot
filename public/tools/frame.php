@@ -149,6 +149,7 @@ function nextArg(){
 function coolDown($name, $time = NULL){
     global $Event;
     if(NULL === $time){
+        clearstatcache();
         return time() - filemtime("../storage/data/coolDown/{$name}/{$Event['user_id']}")-(int)getData("coolDown/{$name}/{$Event['user_id']}");
     }else{
         setData("coolDown/{$name}/{$Event['user_id']}", $time);
