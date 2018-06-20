@@ -3,7 +3,7 @@
 global $Event, $Queue;
 use kjBot\SDK\CQCode;
 
-switch($Event['event']){
+switch($Event['notice_type']){
     case 'group_increase':
         if($Event['user_id'] != config('bot')){
             $Queue[]= sendBack(CQCode::At($Event['user_id']).' 欢迎加入本群，请阅读群公告！');

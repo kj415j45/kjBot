@@ -2,15 +2,9 @@
 
 global $Queue;
 $msg=<<<EOT
-可用命令：
-checkin
-credit
-issue
-osu
-roll
-time
-version
-voice
+查看 kjBot 当前版本及更新日志
+用法：
+!version
 EOT;
 
 $Queue[]= sendBack($msg);

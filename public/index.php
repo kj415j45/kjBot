@@ -24,7 +24,7 @@ try{
     }
 
 }catch(\Exception $e){
-    $Queue[]= new Message(var_dump($Event).$e.$e->getCode(), config('master'), false, true, true);
+    $Queue[]= sendBack($e->getMessage(), true, true);
 }
 
 try{
@@ -33,7 +33,7 @@ try{
         $MsgSender->send($msg);
     }
 }catch(\Exception $e){
-    setData('error.log', var_dump($Event).$e.$e->getCode(), true);
+    setData('error.log', var_dump($Event).$e.$e->getCode()."\n", true);
 }
 
 

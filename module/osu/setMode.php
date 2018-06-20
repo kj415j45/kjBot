@@ -21,6 +21,7 @@ switch($mode){
     case 'ctb':
     case '草他爸':
     case '接水果':
+    case '接屎':
         $m = OsuMode::ctb;
         break;
     case 'mania':
