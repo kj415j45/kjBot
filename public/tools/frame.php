@@ -145,3 +145,12 @@ function nextArg(){
 
     return $Command[$index++];
 }
+
+function coolDown($name, $time = NULL){
+    global $Event;
+    if(NULL === $time){
+        return time() - filemtime("../storage/data/coolDown/{$name}/{$Event['user_id']}")-(int)getData("coolDown/{$name}/{$Event['user_id']}");
+    }else{
+        setData("coolDown/{$name}/{$Event['user_id']}", $time);
+    }
+}

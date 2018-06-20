@@ -3,7 +3,7 @@
 switch($Event['request_type']){
     case 'friend':
         $CQ->setFriendAddRequest($Event['flag'], config('allowFriends')); //交给master二次审核？
-        $Queue[]= new Message('Being friends with '.$Event['user_id'], config('master'), true); //通知master
+        $Queue[]= new Message('Being friends with '.$Event['user_id'], config('master'), false, false, true); //通知master
         $Queue[]= new Message(config('WelcomeMsg'), $Event['user_id'], true); //发送欢迎消息
         break;
     case 'group':
@@ -13,7 +13,7 @@ switch($Event['request_type']){
                 break;
             case 'invite':
                 $CQ->setGroupAddRequest($Event['flag'], $Event['sub_type'], config('allowGroups'));
-                $Queue[]= new Message('Join Group '.$Event['group_id'].' by '.$Event['user_id'], config('master'), true); //通知master
+                $Queue[]= new Message('Join Group '.$Event['group_id'].' by '.$Event['user_id'], config('master'), false, false, true); //通知master
                 break;
             default:
         }
