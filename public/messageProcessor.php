@@ -11,7 +11,8 @@ if(preg_match('/^(['.config('prefix', '!').'])/', $Event['message'], $prefix)){
         throw $e;
     }
 }else{ //不是命令
-    //TODO 交给中间件处理
+    $Message = $Event['message'];
+    require('../middleWare/Chain.php');
 }
 
 ?>
