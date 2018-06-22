@@ -3,6 +3,8 @@
 global $Event, $Queue, $Text;
 requireMaster();
 
+if($Text == '')throw new \Exception();
+
 do{
     $arg = nextArg();
     switch($arg){

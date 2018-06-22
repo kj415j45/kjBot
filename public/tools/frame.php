@@ -39,7 +39,7 @@ function sendBack($msg, $auto_escape = false, $async = false){
  * @param $pending 是否追加写入（默认不追加）
  */
 function setData($filePath, $data, $pending = false){
-    if(!file_exists(dirname('../storage/data/'.$filePath))) mkdir(dirname('../storage/data/'.$filePath), 666, true);
+    if(!file_exists(dirname('../storage/data/'.$filePath))) if(!mkdir(dirname('../storage/data/'.$filePath), 0666, true))throw new \Exception('Failed to create data dir');
     return file_put_contents('../storage/data/'.$filePath, $data, $pending?(FILE_APPEND | LOCK_EX):LOCK_EX);
 }
 
@@ -150,8 +150,13 @@ function coolDown($name, $time = NULL){
     global $Event;
     if(NULL === $time){
         clearstatcache();
-        return time() - filemtime("../storage/data/coolDown/{$name}/{$Event['user_id']}")-(int)getData("coolDown/{$name}/{$Event['user_id']}");
+        return time() - filemtime("../storage/data/coolDown/{$name}")-(int)getData("coolDown/{$name}");
     }else{
-        setData("coolDown/{$name}/{$Event['user_id']}", $time);
+        setData("coolDown/{$name}", $time);
     }
+}
+
+function fromGroup(){
+    global $Event;
+    return isset($Event['group_id']);
 }

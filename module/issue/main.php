@@ -2,8 +2,8 @@
 
 global $Queue, $Text, $Event, $Github;
 
-if(coolDown('issue')<0)throw new \Exception('冷却中');
-coolDown('issue', 60*60*24);
+if(coolDown("issue/{$Event['user_id']}")<0)throw new \Exception('冷却中');
+coolDown("issue/{$Event['user_id']}", 60*60*24);
 
 $length = strpos($Text, "\r");
 if(false===$length)$length=strlen($Text);
