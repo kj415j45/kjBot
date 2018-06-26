@@ -33,6 +33,10 @@ function sendBack($msg, $auto_escape = false, $async = false){
     return new kjBot\Frame\Message($msg, isset($Event['group_id'])?$Event['group_id']:$Event['user_id'], isset($Event['group_id']), $auto_escape, $async);
 }
 
+function sendMaster($msg, $auto_escape = false, $async = false){
+    return new kjBot\Frame\Message($msg, config('master'), false, $auto_escape, $async);
+}
+
 /**
  * @param $filePath 相对于 storage/data/ 的路径
  * @param $data 要存储的数据内容
@@ -159,4 +163,8 @@ function coolDown($name, $time = NULL){
 function fromGroup(){
     global $Event;
     return isset($Event['group_id']);
+}
+
+function leave($msg = '', $code = 0){
+    throw new \Exception($msg, $code);
 }
