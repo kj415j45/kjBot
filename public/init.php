@@ -4,7 +4,7 @@ require('Message.php');
 require('MessageSender.php');
 require('../SDK/Autoload.php');
 require('tools/Autoload.php');
-require('../vendor/autoload.php');
+include('../vendor/autoload.php'); //避免没有vendor的用户出错
 use kjBot\SDK\CoolQ;
 use kjBot\SDK\CQCode;
 use kjBot\Frame\MessageSender;
@@ -18,6 +18,8 @@ $Queue = [];
 $MsgSender = new MessageSender($CQ);
 $Debug = ('true'===config('DEBUG', 'false'))?true:false;
 $DebugListen = config('DebugListen', config('master'));
+$Command = [];
+$Text = '';
 
 $Github = new \Github\Client();
 $Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);

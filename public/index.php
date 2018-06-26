@@ -18,7 +18,7 @@ try{
     //调试
     if($Debug && $Event['user_id'] == $DebugListen){
         $Queue[]= new Message(
-            var_export($Event, true)
+            var_export($Queue, true)
             , config('master'), false, true, true
         );
     }

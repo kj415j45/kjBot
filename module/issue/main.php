@@ -10,6 +10,8 @@ if(false===$length)$length=strlen($Text);
 $title = substr($Text, 0, $length);
 $body = substr($Text, $length+2);
 
+if($title == '')throw new \Exception('请提供 issue 标题');
+
 $result = $Github->api('issue')->create('kj415j45', 'kjBot', [
     'title' => '[From Bot] '.$title,
     'body' => '>该 Issue 由 Bot 通过 API 生成，创建者：'.$Event['user_id']."\n\n".$body,

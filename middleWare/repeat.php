@@ -12,14 +12,15 @@ if(getData("repeat/{$Event['group_id']}-1")==''){
         if(coolDown('repeat/'.$Event['group_id'])>0){
             coolDown('repeat/'.$Event['group_id'], 60);
             $Queue[]= sendBack($a);
-            setData("repeat/{$Event['group_id']}-4", $Message, true);
         }
         setData("repeat/{$Event['group_id']}-1", $Message, true);
         setData("repeat/{$Event['group_id']}-2", '');
-        throw new \Exception();
+        setData("repeat/{$Event['group_id']}-4", $Message, true);
+        leave();
     }else{
         setData("repeat/{$Event['group_id']}-1", $Message, true);
         setData("repeat/{$Event['group_id']}-2", '');
+        setData("repeat/{$Event['group_id']}-4", '');
     }
 }else if(getData("repeat/{$Event['group_id']}-2")==''){
     $a = getData("repeat/{$Event['group_id']}-1");
@@ -29,14 +30,15 @@ if(getData("repeat/{$Event['group_id']}-1")==''){
         if(coolDown('repeat/'.$Event['group_id'])>0){
             coolDown('repeat/'.$Event['group_id'], 60);
             $Queue[]= sendBack($a);
-            setData("repeat/{$Event['group_id']}-4", $Message, true);
         }
         setData("repeat/{$Event['group_id']}-2", $Message, true);
         setData("repeat/{$Event['group_id']}-3", '');
-        throw new \Exception();
+        setData("repeat/{$Event['group_id']}-4", $Message, true);
+        leave();
     }else{
         setData("repeat/{$Event['group_id']}-2", $Message, true);
         setData("repeat/{$Event['group_id']}-3", '');
+        setData("repeat/{$Event['group_id']}-4", '');
     }
 }else if(getData("repeat/{$Event['group_id']}-3")==''){
     $a = getData("repeat/{$Event['group_id']}-1");
@@ -46,14 +48,15 @@ if(getData("repeat/{$Event['group_id']}-1")==''){
         if(coolDown('repeat/'.$Event['group_id'])>0){
             coolDown('repeat/'.$Event['group_id'], 60);
             $Queue[]= sendBack($a);
-            setData("repeat/{$Event['group_id']}-4", $Message, true);
         }
         setData("repeat/{$Event['group_id']}-3", $Message, true);
         setData("repeat/{$Event['group_id']}-1", '');
-        throw new \Exception();
+        setData("repeat/{$Event['group_id']}-4", $Message, true);
+        leave();
     }else{
         setData("repeat/{$Event['group_id']}-3", $Message, true);
         setData("repeat/{$Event['group_id']}-1", '');
+        setData("repeat/{$Event['group_id']}-4", '');
     }
 }
 
