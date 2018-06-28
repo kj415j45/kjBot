@@ -2,7 +2,7 @@
     "name": "kj415j45/kjbot",
     "description": "kjBot Framework and Modules",
     "keywords": ["qqbot", "coolq-http-api", "kj"],
-    "license": "AGPL",
+    "license": "AGPL-3.0-or-later",
     "type": "project",
     "autoload": {
         "psr-4": {
