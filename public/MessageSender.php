@@ -8,7 +8,7 @@ class MessageSender{
     /**
      * @param kjBot\SDK\CoolQ $CoolQ 一个酷Q实例
      */
-    function __construct($CoolQ){
+    function __construct(\kjBot\SDK\CoolQ $CoolQ){
         $this->CQ = $CoolQ;
     }
 
@@ -16,7 +16,7 @@ class MessageSender{
      * 发送一条消息
      * @param kjBot\Frame\Message $message
      */
-    function send($message){
+    function send(Message $message){
         if($message->toGroup){
             if($message->async){
                 $this->CQ->sendGroupMsgAsync($message->id, $message->msg, $message->auto_escape);

@@ -12,15 +12,12 @@ try{
             require($Event['post_type'].'Processor.php');
             break;
         default:
-            $Queue[]= new Message('Unknown post type, Event:'."\n".var_export($Event, true), config('master'), false);
+            $Queue[]= sendMaster('Unknown post type, Event:'."\n".var_export($Event, true));
     }
 
     //调试
     if($Debug && $Event['user_id'] == $DebugListen){
-        $Queue[]= new Message(
-            var_export($Queue, true)
-            , config('master'), false, true, true
-        );
+        $Queue[]= sendMaster(var_export($Queue, true));
     }
 
 }catch(\Exception $e){

@@ -1,7 +1,25 @@
 {
+    "name": "kj415j45/kjBot",
+    "description": "kjBot Framework and Modules",
+    "keywords": ["qqbot", "coolq-http-api", "kj"],
+    "license": "MIT + AGPL",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "kjBot\\SDK\\": "SDK/",
+            "kjBot\\Frame\\": "public/"
+        },
+        "files": ["public/tools/Autoload.php"]
+    },
     "require": {
+        "php": "^7.0",
         "intervention/image": "^2.4",
         "knplabs/github-api": "^2.8",
         "php-http/guzzle6-adapter": "^1.1"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('config.ini') || copy('config.ini.example', 'config.ini');\""
+        ]
     }
 }
