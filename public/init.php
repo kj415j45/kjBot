@@ -1,9 +1,5 @@
 <?php
 
-require('Message.php');
-require('MessageSender.php');
-require('../SDK/Autoload.php');
-require('tools/Autoload.php');
 include('../vendor/autoload.php'); //避免没有vendor的用户出错
 use kjBot\SDK\CoolQ;
 use kjBot\SDK\CQCode;
