@@ -21,7 +21,4 @@ $DebugListen = config('DebugListen', config('master'));
 $Command = [];
 $Text = '';
 
-$Github = new \Github\Client();
-$Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);
-
 ?>
