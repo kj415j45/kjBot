@@ -1,9 +1,12 @@
 <?php
 
-global $Queue, $Text, $Event, $Github;
+global $Queue, $Text, $Event;
 
 if(coolDown("issue/{$Event['user_id']}")<0)throw new \Exception('冷却中');
 coolDown("issue/{$Event['user_id']}", 60*60*24);
+
+$Github = new \Github\Client();
+$Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);
 
 $length = strpos($Text, "\r");
 if(false===$length)$length=strlen($Text);
