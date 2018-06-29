@@ -9,6 +9,8 @@ $page = 1;
 do{
     $arg = nextArg();
     switch($arg){
+        case '-':
+            $target = nextArg();
         case '-page':
             $page = nextArg();
             break;  
@@ -47,7 +49,11 @@ if($json == '[]')leave('没有结果');
 
 $result = json_decode($json, true);
 
-$index = rand(0, count($result)-1);
+if(isset($target) && 1<=$target && $target<=count($result)){
+    $index = $target;
+}else{
+    $index = rand(0, count($result)-1);
+}
 
 $pixiv = $result[$index++];
 
