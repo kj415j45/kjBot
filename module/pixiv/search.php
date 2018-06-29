@@ -50,7 +50,7 @@ if($json == '[]')leave('没有结果');
 $result = json_decode($json, true);
 
 if(isset($target) && 1<=$target && $target<=count($result)){
-    $index = $target;
+    $index = $target-1;
 }else{
     $index = rand(0, count($result)-1);
 }
