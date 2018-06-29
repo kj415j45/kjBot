@@ -19,6 +19,6 @@ do{
     }
 }while($arg !== NULL);
 
-$Queue[]= sendBack($Text);
+$Queue[]= sendBack($Text, $escape, $async);
 
 ?>
