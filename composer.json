@@ -2,7 +2,16 @@
     "name": "kj415j45/kjbot",
     "description": "kjBot Framework and Modules",
     "keywords": ["qqbot", "coolq-http-api", "kj"],
-    "license": "AGPL-3.0-or-later",
+    "license": "(MIT and AGPL-3.0-or-later)",
+    "authors": [
+        {
+            "name": "kj415j45",
+            "email": "kj415j45@gmail.com"
+        }
+    ],
+    "support": {
+        "QQ Group": "805348195"
+    },
     "type": "project",
     "autoload": {
         "psr-4": {
@@ -21,5 +30,9 @@
         "post-root-package-install": [
             "@php -r \"file_exists('config.ini') || copy('config.ini.example', 'config.ini');\""
         ]
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
