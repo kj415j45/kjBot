@@ -11,6 +11,7 @@ do{
     switch($arg){
         case '-':
             $target = nextArg();
+            break;
         case '-page':
             $page = nextArg();
             break;  
