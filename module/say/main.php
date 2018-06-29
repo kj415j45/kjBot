@@ -5,6 +5,9 @@ requireMaster();
 
 if($Text == '')throw new \Exception();
 
+$escape = false;
+$async = false;
+
 do{
     $arg = nextArg();
     switch($arg){
