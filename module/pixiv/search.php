@@ -59,7 +59,7 @@ if(isset($target) && 1<=$target && $target<=count($result)){
 $pixiv = $result[$index++];
 
 $msg=<<<EOT
-该关键字共有 {$count[1]} 幅作品，当前是第 {$page} 页第 {$index} 幅
+该关键字共有 {$count[1]} 幅作品，这是第 {$page} 页第 {$index} 幅
 插画ID：{$pixiv['illustId']}
 画师ID：{$pixiv['userId']}
 
