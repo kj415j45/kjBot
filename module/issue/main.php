@@ -2,18 +2,18 @@
 
 global $Queue, $Text, $Event;
 
-if(coolDown("issue/{$Event['user_id']}")<0)throw new \Exception('冷却中');
-coolDown("issue/{$Event['user_id']}", 60*60*24);
-
-$Github = new \Github\Client();
-$Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);
-
 $length = strpos($Text, "\r");
 if(false===$length)$length=strlen($Text);
 $title = substr($Text, 0, $length);
 $body = substr($Text, $length+2);
 
-if($title == '')throw new \Exception('请提供 issue 标题');
+if($title == '')leave('请提供 issue 标题');
+
+if(coolDown("issue/{$Event['user_id']}")<0);leave('冷却中');
+coolDown("issue/{$Event['user_id']}", 60*60*24);
+
+$Github = new \Github\Client();
+$Github->authenticate(config('GITHUB_TOKEN'), '', \Github\Client::AUTH_HTTP_TOKEN);
 
 $result = $Github->api('issue')->create('kj415j45', 'kjBot', [
     'title' => '[From Bot] '.$title,
