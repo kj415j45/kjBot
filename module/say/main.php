@@ -1,9 +1,9 @@
 <?php
 
-global $Event, $Queue, $Text;
+global $Queue, $Text;
 requireMaster();
 
-if($Text == '')throw new \Exception();
+if($Text == '')leave();
 
 $escape = false;
 $async = false;
