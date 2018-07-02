@@ -1,4 +1,4 @@
-# kjBot [![CodeFactor](https://www.codefactor.io/repository/github/kj415j45/kjbot/badge/master)](https://www.codefactor.io/repository/github/kj415j45/kjbot/overview/master)[![Latest Stable Version](https://poser.pugx.org/kj415j45/kjbot/v/stable)](https://packagist.org/packages/kj415j45/kjbot)[![Total Downloads](https://poser.pugx.org/kj415j45/kjbot/downloads)](https://packagist.org/packages/kj415j45/kjbot)[![License](https://poser.pugx.org/kj415j45/kjbot/license)](https://packagist.org/packages/kj415j45/kjbot)
+# kjBot [![CodeFactor](https://www.codefactor.io/repository/github/kj415j45/kjbot/badge/master)](https://www.codefactor.io/repository/github/kj415j45/kjbot/overview/master) [![Latest Stable Version](https://poser.pugx.org/kj415j45/kjbot/v/stable)](https://packagist.org/packages/kj415j45/kjbot) [![Total Downloads](https://poser.pugx.org/kj415j45/kjbot/downloads)](https://packagist.org/packages/kj415j45/kjbot) [![License](https://poser.pugx.org/kj415j45/kjbot/license)](https://packagist.org/packages/kj415j45/kjbot)
 
 kjBot 是一个轻量级多功能的酷Q机器人框架。
 
