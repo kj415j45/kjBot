@@ -4,6 +4,7 @@ global $Queue;
 
 $templeteName = nextArg();
 $templete = explode("\n", getData("draw/{$templeteName}"));
+if($templete==[''])leave('没有该模版');
 $cardCount = count($templete)-1;
 
 $count = (int)nextArg();
