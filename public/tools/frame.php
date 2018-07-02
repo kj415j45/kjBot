@@ -120,6 +120,15 @@ function sendImg($str):string{
 }
 
 /**
+ * 发送录音
+ * @param string $str 录音（字符串形式）
+ * @return string 录音对应的 base64 格式 CQ码
+ */
+function sendRec($str):string{
+    return CQCode::Record('base64://'.base64_encode($str));
+}
+
+/**
  * 装载模块
  * @param string $module 模块名
  */
