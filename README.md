@@ -1,4 +1,4 @@
-# kjBot [![CodeFactor](https://www.codefactor.io/repository/github/kj415j45/kjbot/badge/master)](https://www.codefactor.io/repository/github/kj415j45/kjbot/overview/master)
+# kjBot [![CodeFactor](https://www.codefactor.io/repository/github/kj415j45/kjbot/badge/master)](https://www.codefactor.io/repository/github/kj415j45/kjbot/overview/master)[![Latest Stable Version](https://poser.pugx.org/kj415j45/kjbot/v/stable)](https://packagist.org/packages/kj415j45/kjbot)[![Total Downloads](https://poser.pugx.org/kj415j45/kjbot/downloads)](https://packagist.org/packages/kj415j45/kjbot)[![License](https://poser.pugx.org/kj415j45/kjbot/license)](https://packagist.org/packages/kj415j45/kjbot)
 
 kjBot 是一个轻量级多功能的酷Q机器人框架。
 
@@ -49,6 +49,8 @@ git clone https://github.com/kj415j45/kjBot.git
 cd kjBot/
 ./build.sh
 ```
+
+仅作为框架使用时请清除 `composer.json` 内的 `require` 以及 `module/`、`middleWare/` 文件夹内的全部内容。
 
 ### 入门
 
