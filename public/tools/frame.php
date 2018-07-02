@@ -2,6 +2,7 @@
 
 use kjBot\SDK\CQCode;
 use kjBot\Frame\Message;
+use kjBot\Frame\UnauthorizedException;
 
 /**
  * 读取配置文件
@@ -170,7 +171,7 @@ function isMaster(){
 
 function requireMaster(){
     if(!isMaster()){
-        throw new kjBot\Frame\UnauthorizedException();
+        throw new UnauthorizedException();
     }
 }
 
@@ -221,4 +222,22 @@ function fromGroup($group = NULL){
  */
 function leave($msg = '', $code = 0){
     throw new \Exception($msg, $code);
+}
+
+/**
+ * 检查是否在黑名单中
+ * @return bool
+ */
+function inBlackList($qq){
+    $blackList = getData('black.txt');
+    if($blackList === false)leave('无法打开黑名单');
+    if(strpos($blackList, ''.$qq) !== false){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function block($qq){
+    if(inBlackList($qq))throw new UnauthorizedException();
 }

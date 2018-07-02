@@ -17,4 +17,6 @@ $DebugListen = config('DebugListen', config('master'));
 $Command = [];
 $Text = '';
 
+block($Event['user_id']);
+
 ?>
