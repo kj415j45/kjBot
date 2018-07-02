@@ -1,3 +1,0 @@
-<?php
-loadModule('osu.me');
-?>

@@ -2,6 +2,7 @@
 
 use kjBot\SDK\CQCode;
 use kjBot\Frame\Message;
+use kjBot\Frame\UnauthorizedException;
 
 /**
  * 读取配置文件
@@ -119,6 +120,15 @@ function sendImg($str):string{
 }
 
 /**
+ * 发送录音
+ * @param string $str 录音（字符串形式）
+ * @return string 录音对应的 base64 格式 CQ码
+ */
+function sendRec($str):string{
+    return CQCode::Record('base64://'.base64_encode($str));
+}
+
+/**
  * 装载模块
  * @param string $module 模块名
  */
@@ -170,7 +180,7 @@ function isMaster(){
 
 function requireMaster(){
     if(!isMaster()){
-        throw new kjBot\Frame\UnauthorizedException();
+        throw new UnauthorizedException();
     }
 }
 
@@ -221,4 +231,22 @@ function fromGroup($group = NULL){
  */
 function leave($msg = '', $code = 0){
     throw new \Exception($msg, $code);
+}
+
+/**
+ * 检查是否在黑名单中
+ * @return bool
+ */
+function inBlackList($qq){
+    $blackList = getData('black.txt');
+    if($blackList === false)leave('无法打开黑名单');
+    if(strpos($blackList, ''.$qq) !== false){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function block($qq){
+    if(inBlackList($qq))throw new UnauthorizedException();
 }
