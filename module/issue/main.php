@@ -31,8 +31,8 @@ $token = $github->api('apps')->createInstallationToken(config('Github_Installati
 $github->authenticate($token['token'], null, Github\Client::AUTH_HTTP_TOKEN);
 
 $result = $github->api('issue')->create('kj415j45', 'kjBot', [
-    'title' => '[From Bot] '.$title,
-    'body' => '>该 Issue 由 Bot 通过 API 生成，创建者：'.$Event['user_id']."\n\n".$body,
+    'title' => $title,
+    'body' => '>创建者：'.$Event['user_id']."\n\n".$body,
     'assignees' => ['kj415j45'],
 ]);
 
