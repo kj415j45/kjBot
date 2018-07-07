@@ -14,20 +14,21 @@ $beatmapSetID = (int)nextArg();
 
 $temp = getData("osu/listen/{$beatmapSetID}.mp3");
 if($temp !== false){
-    $Queue[]= sendBack(sendRec($temp));
     decCredit($Event['user_id'], 1);
+    $Queue[]= sendBack(sendRec($temp));
     $Queue[]= sendBack('点歌成功，你现在的余额为 '.getCredit($Event['user_id']));
     leave();
 }
+decCredit($Event['user_id'], 5);
 
 $osz = new ZipFile();
 
 $web = file_get_contents('https://osu.ppy.sh/d/'.$beatmapSetID, false, stream_context_create($webHeader));
-if(!$web)leave('获取歌曲失败');
+if(!$web){addCredit($Event['user_id'], 5);leave('获取歌曲失败');}
 
 try{
     $osz->openFromString($web);
-}catch(\Exception $e){leave('无法打开谱面');}
+}catch(\Exception $e){addCredit($Event['user_id'], 5);leave('无法打开谱面');}
 
 $oszFiles = $osz->matcher();
 
@@ -37,7 +38,6 @@ $mp3 = $osz->getEntryContents($mp3FileName);
 setData("osu/listen/{$beatmapSetID}.mp3", $mp3);
 
 $Queue[]= sendBack(sendRec($mp3));
-decCredit($Event['user_id'], 5);
 $Queue[]= sendBack('点歌成功，你现在的余额为 '.getCredit($Event['user_id']));
 
 ?>
