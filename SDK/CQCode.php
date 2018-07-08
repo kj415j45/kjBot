@@ -62,7 +62,7 @@ class CQCode{
         ]);
     }
 
-    public static function CustomMusic($type = custom, $audio, $url, $title, $content, $image){
+    public static function CustomMusic($audio, $url, $title, $content, $image){
         return self::CQ('music', [
             'type' => 'custom',
             'audio' => $audio,
