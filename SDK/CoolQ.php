@@ -11,7 +11,7 @@ class CoolQ{
         $this->token = $token;
     }
 
-    ///以下源码全部来自kilingzhang/coolq-php-sdk : src/CoolQ.php
+    ///以下源码部分来自kilingzhang/coolq-php-sdk : src/CoolQ.php
     public function sendPrivateMsg($user_id, $message, $auto_escape = false){
         $api = API::send_private_msg;
         $param = [
@@ -301,18 +301,63 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
-    public function setRestart(){
+    public function setRestart($clean_cache = false){
         $api = API::set_restart;
-        $param = [];
+        $param = [
+            'clean_cache' => $clean_cache,
+        ];
         return $this->query($api, $param);
     }
 
-    public function setRestartPlugin(){
+    public function setRestartPlugin($delay = 0){
         $api = API::set_restart_plugin;
         $param = [];
         return $this->query($api, $param);
     }
-    ///以上源码全部来自kilingzhang/coolq-php-sdk : src/CoolQ.php
+
+    public function cleanDataDir($data_dir){
+        $api = API::clean_data_dir;
+        $param = [
+            'data_dir' => $data_dir,
+        ];
+        return $this->query($api, $param);
+    }
+
+    public function cleanPluginLog(){
+        $api = API::clean_plugin_log;
+        $param = [];
+        return $this->query($api, $param);
+    }
+
+    public function _getFriendList(){
+        $api = API::_get_friend_list;
+        $param = [];
+        return $this->query($api, $param);
+    }
+
+    public function _getGroupInfo(){
+        $api = API::_get_group_info;
+        $param = [];
+        return $this->query($api, $param);
+    }
+
+    public function __checkUpdate($automatic){
+        $api = API::__check_update;
+        $param = [
+            'automatic' => $automatic,
+        ];
+        return $this->query($api, $param);
+    }
+
+    public function __handleQuickOperation($context, $operation){
+        $api = API::__handle_quick_operation;
+        $param = [
+            'context' => $context,
+            'operation' => $operation,
+        ];
+        return $this->query($api, $param);
+    }
+    ///以上源码部分来自kilingzhang/coolq-php-sdk : src/CoolQ.php
     ///许可证：Open Source Licenses/kilingzhang/coolq-php-sdk/LICENSE
 
     private function query($api, $param){
@@ -321,11 +366,11 @@ class CoolQ{
         foreach($param as $key => $value){
             $queryStr.= ($key.'='.urlencode(is_bool($value)?((int)$value):$value).'&');
         }
-        $result = json_decode(file_get_contents('http://'.$this->host.$api.$queryStr), true);
+        $result = json_decode(file_get_contents('http://'.$this->host.$api.$queryStr));
 
-        switch($result['retcode']){
+        switch($result->retcode){
             case 0:
-                return $result['data'];
+                return $result->data;
             case 1:
                 return NULL;
             default:
