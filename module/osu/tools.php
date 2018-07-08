@@ -100,6 +100,7 @@ function getModImage($list){
 
 function getFCPP($map, $stat){
     $mods=getModString($stat['enabled_mods']);
+    $acc=ACCof($stat);
     exec("curl https://osu.ppy.sh/osu/{$map} | oppai - ".(null!=$mods?"+{$mods}":'')." {$acc} 0m -ojson", $result);
     return sprintf('%.2f', json_decode($result[0], true)['pp']);
 }

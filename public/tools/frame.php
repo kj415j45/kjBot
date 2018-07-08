@@ -8,9 +8,9 @@ use kjBot\Frame\UnauthorizedException;
  * 读取配置文件
  * @param string $kay 键值
  * @param string $defaultValue 默认值
- * @return string
+ * @return string|null
  */
-function config(string $key, string $defaultValue = NULL):string{
+function config(string $key, string $defaultValue = NULL):?string{
     global $Config;
 
     if(array_key_exists($key, $Config)){
@@ -197,13 +197,14 @@ function nextArg(){
  * @param string $name 冷却文件名称，对指定用户冷却需带上Q号
  * @param int $time 冷却时间
  */
-function coolDown(string $name, $time = NULL){
+function coolDown(string $name, $time = NULL):int{
     global $Event;
     if(NULL === $time){
         clearstatcache();
         return time() - filemtime("../storage/data/coolDown/{$name}")-(int)getData("coolDown/{$name}");
     }else{
         setData("coolDown/{$name}", $time);
+        return -$time;
     }
 }
 
@@ -214,7 +215,7 @@ function coolDown(string $name, $time = NULL){
  * @param mixed $group=NULL 群号
  * @return bool
  */
-function fromGroup($group = NULL){
+function fromGroup($group = NULL):bool{
     global $Event;
     if($group == NULL){
         return isset($Event['group_id']);
@@ -237,7 +238,7 @@ function leave($msg = '', $code = 0){
  * 检查是否在黑名单中
  * @return bool
  */
-function inBlackList($qq){
+function inBlackList($qq):bool{
     $blackList = getData('black.txt');
     if($blackList === false)leave('无法打开黑名单');
     if(strpos($blackList, ''.$qq) !== false){
