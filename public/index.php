@@ -5,6 +5,11 @@ require('init.php');
 use kjBot\Frame\Message;
 
 try{
+    $listen = config('Listen');
+    if($listen !== NULL && ($Event['group_id'] == $listen || $listen == $Event['user_id'])){
+        $Queue[]= sendMaster('['.date('Y-m-d H:i:s', $Event['time']-86400)."] {$Event['user_id']} say:\n{$Event['message']}", false, true);
+    }
+
     switch($Event['post_type']){
         case 'message':
         case 'notice':
