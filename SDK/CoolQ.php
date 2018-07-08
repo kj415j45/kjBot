@@ -311,7 +311,9 @@ class CoolQ{
 
     public function setRestartPlugin($delay = 0){
         $api = API::set_restart_plugin;
-        $param = [];
+        $param = [
+            'delay' => $delay,
+        ];
         return $this->query($api, $param);
     }
 
