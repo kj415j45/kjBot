@@ -65,7 +65,7 @@ function sendMaster(string $msg, bool $auto_escape = false, bool $async = false)
  * @return mixed string|false
  */
 function setData(string $filePath, $data, bool $pending = false){
-    if(!file_exists(dirname('../storage/data/'.$filePath))) if(!mkdir(dirname('../storage/data/'.$filePath), 0666, true))throw new \Exception('Failed to create data dir');
+    if(!file_exists(dirname('../storage/data/'.$filePath))) if(!mkdir(dirname('../storage/data/'.$filePath), 0777, true))throw new \Exception('Failed to create data dir');
     return file_put_contents('../storage/data/'.$filePath, $data, $pending?(FILE_APPEND | LOCK_EX):LOCK_EX);
 }
 
