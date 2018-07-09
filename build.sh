@@ -8,4 +8,4 @@ php composer.phar install
 mkdir storage/
 mkdir storage/data/
 mkdir storage/cache/
-chmod -R 0666 storage/
+chmod -R 0777 storage/
