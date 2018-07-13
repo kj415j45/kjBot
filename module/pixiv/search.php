@@ -46,7 +46,7 @@ preg_match('/<span class="count-badge">(\d+)件/', $web, $count);
 
 $json = html_entity_decode($match[1]);
 
-if($json == '[]')leave('没有结果');
+if($json == '[]' || $json == '')leave('没有结果');
 
 $result = json_decode($json, true);
 
