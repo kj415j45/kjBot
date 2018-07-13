@@ -157,7 +157,6 @@ function loadModule(string $module){
         }else{
             leave('没有该命令：'.substr($module, 5));
         }
-        
     }
 }
 
