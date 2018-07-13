@@ -134,7 +134,7 @@ function sendRec($str):string{
  */
 function loadModule(string $module){
     if('.' === $module[0]){
-        throw new \Exception('Illegal module name');
+        leave('Illegal module name');
     }
     $moduleFile = str_replace('.', '/', $module, $count);
     if(0 === $count){
@@ -146,10 +146,18 @@ function loadModule(string $module){
     if(file_exists('../module/'.$moduleFile)){
         require('../module/'.$moduleFile);
     }else{
-        global $Queue;
-        if(!fromGroup()){
-            $Queue[]= sendBack('没有该命令：'.$module);
+        if(strpos($module, 'help')!==0){ //防止无限尝试加载help
+            try{
+                loadModule('help.'.$module); //尝试加载help
+            }catch(\Exception $e){
+                if(!fromGroup()){
+                    throw $e;
+                }
+            }
+        }else{
+            leave('没有该命令：'.substr($module, 5));
         }
+        
     }
 }
 
