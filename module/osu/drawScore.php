@@ -38,7 +38,7 @@ function drawScore($recent, $map, $u){
     $scoreImg
     //准备模版
     ->blur(8)
-    ->insert(Image::make($here.'templete.png')->opacity(80), 'center')
+    ->insert(Image::make($here.'template.png')->opacity(80), 'center')
     //两侧文字
     ->text($recent['maxcombo'].'x', 310, 350, $sideText)
     ->text($acc, 975, 350, $sideText)
