@@ -6,6 +6,6 @@ do{
     $arg = nextArg();
     $query.=urlencode($arg).'+';
 }while($arg!==NULL);
-$Queue[]= sendBack('https://google.com/search?q='.$query);
+$Queue[]= sendBack('https://google.com/search?q='.rtrim($query, '+'));
 
 ?>

@@ -8,4 +8,7 @@ php composer.phar install
 mkdir storage/
 mkdir storage/data/
 mkdir storage/cache/
+cd storage/data/
+sqlite3 stat.db ".read ../../stat.sql"
+cd ../../
 chmod -R 0777 storage/
