@@ -144,6 +144,10 @@ function loadModule(string $module){
     }
 
     if(file_exists('../module/'.$moduleFile)){
+        if(strpos($module, '.tools')!==false){ //防止记录工具类模块
+            global $Event;
+            addCommandCount($Event['user_id'], $module);
+        }
         require('../module/'.$moduleFile);
     }else{
         if(strpos($module, 'help')!==0){ //防止无限尝试加载help
