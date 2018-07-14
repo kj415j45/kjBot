@@ -6,6 +6,6 @@ do{
     $arg = nextArg();
     $query.=urlencode($arg).'+';
 }while($arg!==NULL);
-$Queue[]= sendBack('https://baidu.com/s?word='.$query);
+$Queue[]= sendBack('https://baidu.com/s?word='.rtrim($query, '+'));
 
 ?>
