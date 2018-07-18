@@ -7,6 +7,6 @@ coolDown("unsleep/{$Event['user_id']}", 60*60*24);
 
 $group = nextArg();
 $CQ->setGroupBan($group, $Event['user_id'], 0);
-$Queue[]= '已在 '.$group.' 解除禁言';
+$Queue[]= sendBack('已在 '.$group.' 解除禁言');
 
 ?>

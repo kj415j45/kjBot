@@ -1,7 +1,11 @@
 <?php
+function allowRecord($user_id){
+    return trim(getData('recordStat/'.$user_id))==='true';
+}
+
 function addCommandCount($user_id, $command){
     global $StatDB;
-    if(trim(getData('recordStat/'.$user_id))==='true'){ //如果用户同意记名记录
+    if(allowRecord($user_id)){ //如果用户同意记名记录
         $row = getCommandCount($user_id, $command);
         if($row === false){
             $StatDB->query("INSERT INTO record VALUES ({$user_id}, '{$command}', 1)");
@@ -11,7 +15,7 @@ function addCommandCount($user_id, $command){
         }
         
     }
-    $row = getCommandCount($user_id, $command);
+    $row = getCommandCount(0, $command);
     if($row === false){
         $StatDB->query("INSERT INTO record VALUES (0, '{$command}', 1)");
     }else{
@@ -28,9 +32,9 @@ function getCommandCount($user_id, $command){
 
 function getUserCommandCount($user_id){
     global $StatDB;
-    $result = $StatDB->query("SELECT command, count FROM record WHERE user_id={$user_id}");
-    while($row = $result->fetchArray() && $row !== false){
-        $text.="{$row['command']} {$row['count']}";
+    $result = $StatDB->query("SELECT command, count FROM record WHERE user_id={$user_id} ORDER BY count DESC");
+    while(($row = $result->fetchArray()) && ($row !== false)){
+        $text.="{$row['command']} {$row['count']}\n";
     }
     return $text;
 }
