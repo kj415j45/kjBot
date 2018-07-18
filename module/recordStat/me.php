@@ -9,6 +9,11 @@ if(!allowRecord($User_id))leave(<<<EOT
 EOT
 );
 
-$Queue[]= sendPM(getUserCommandCount($User_id));
+if(fromGroup()){
+    $Queue[]= sendBack(getUserCommandCount($User_id, 10));
+}else{
+    $Queue[]= sendBack(getUserCommandCount($User_id, abs(nextArg())));
+}
+
 
 ?>
