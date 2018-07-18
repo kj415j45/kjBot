@@ -19,7 +19,7 @@ try{
             require($Event['post_type'].'Processor.php');
             break;
         default:
-            $Queue[]= sendMaster('Unknown post type, Event:'."\n".var_export($Event, true));
+            $Queue[]= sendMaster('Unknown post type, Event:'."\n".var_export($_SERVER, true));
     }
 
     //调试
