@@ -11,7 +11,7 @@ function addCommandCount($user_id, $command){
         }
         
     }
-    $row = getCommandCount($user_id, $command);
+    $row = getCommandCount(0, $command);
     if($row === false){
         $StatDB->query("INSERT INTO record VALUES (0, '{$command}', 1)");
     }else{
