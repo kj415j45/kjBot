@@ -8,7 +8,6 @@ kjBot 是一个轻量级多功能的酷Q机器人框架。
 
 ```
 /
-|--Open Source Licenses/ #存放开源许可证
 |--SDK/ #kjBot\SDK
 |--public/
     |--tools/ #各类开放函数的文件
@@ -81,6 +80,20 @@ if(!fromGroup()){ //如果消息不是来自群聊
 ## 参与开发
 
 ![](https://user-images.githubusercontent.com/18349191/42219471-99b181e4-7efe-11e8-92a8-20535f40d126.png)
+
+## 感谢
+
+- [richardchien/coolq-http-api](https://github.com/richardchien/coolq-http-api)
+  - 酷Q 与许多 Bot 之间的桥梁
+- [kilingzhang/coolq-php-sdk](https://github.com/kilingzhang/coolq-php-sdk)
+  - 本项目的起源
+- [kj415j45/jkBot](https://github.com/kj415j45/jkBot)
+  - 本项目的零代
+- 贡献者
+  - [Cyanoxygen](https://github.com/Cyanoxygen)
+  - [Baka-D](https://github.com/Baka-D)
+  - [lslqtz](https://github.com/lslqtz)
+  - [LovelyA72](https://github.com/LovelyA72)
 
 ## LICENSE
 

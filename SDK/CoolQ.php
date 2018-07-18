@@ -11,7 +11,6 @@ class CoolQ{
         $this->token = $token;
     }
 
-    ///以下源码部分来自kilingzhang/coolq-php-sdk : src/CoolQ.php
     public function sendPrivateMsg($user_id, $message, $auto_escape = false){
         $api = API::send_private_msg;
         $param = [
@@ -280,6 +279,12 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
+    public function get_credentials(){
+        $api = API::get_credentials;
+        $param = [];
+        return $this->query($api, $param);
+    }
+
     public function getRecord($file, $out_format){
         $api = API::get_record;
         $param = [
@@ -337,9 +342,11 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
-    public function _getGroupInfo(){
+    public function _getGroupInfo($flat = false){
         $api = API::_get_group_info;
-        $param = [];
+        $param = [
+            'flat' => $flat,
+        ];
         return $this->query($api, $param);
     }
 
@@ -359,8 +366,6 @@ class CoolQ{
         ];
         return $this->query($api, $param);
     }
-    ///以上源码部分来自kilingzhang/coolq-php-sdk : src/CoolQ.php
-    ///许可证：Open Source Licenses/kilingzhang/coolq-php-sdk/LICENSE
 
     private function query($api, $param){
         $queryStr = '?';

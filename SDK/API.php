@@ -1,7 +1,6 @@
 <?php
 namespace kjBot\SDK;
 
-///以下源码部分来自kilingzhang/coolq-php-sdk : src/URL.php
 class API{
     const send_private_msg = '/send_private_msg';
     const send_private_msg_async = '/send_private_msg_async';
@@ -32,6 +31,7 @@ class API{
     const get_group_member_list = '/get_group_member_list';
     const get_cookies = '/get_cookies';
     const get_csrf_token = '/get_csrf_token';
+    const get_credentials = '/get_credentials';
     const get_record = '/get_record';
     const get_status = '/get_status';
     const get_version_info = '/get_version_info';
@@ -44,5 +44,3 @@ class API{
     const __check_update = '/.check_update';
     const __handle_quick_operation = '/.handle_quick_operation';
 }
-///以上源码部分来自kilingzhang/coolq-php-sdk : src/URL.php
-///许可证：Open Source Licenses/kilingzhang/coolq-php-sdk/LICENSE
