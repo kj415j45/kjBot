@@ -12,7 +12,7 @@ EOT
 if(fromGroup()){
     $Queue[]= sendBack(getUserCommandCount($User_id, 10));
 }else{
-    $Queue[]= sendBack(getUserCommandCount($User_id, abs(nextArg())));
+    $Queue[]= sendBack(getUserCommandCount($User_id, nextArg()));
 }
 
 
