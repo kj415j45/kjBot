@@ -279,7 +279,7 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
-    public function get_credentials(){
+    public function getCredentials(){
         $api = API::get_credentials;
         $param = [];
         return $this->query($api, $param);
