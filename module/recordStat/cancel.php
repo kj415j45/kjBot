@@ -3,7 +3,6 @@
 global $User_id;
 loadModule('credit.tools');
 
-if(fromGroup())leave();
 if(trim(getData('recordStat/'.$User_id))!='true')leave();
 
 if(trim(getData('recordStat/r'.$User_id))=='true')decCredit($User_id, 415);

@@ -30,13 +30,13 @@ function getCommandCount($user_id, $command){
     return $result->fetchArray();
 }
 
-function getUserCommandCount($user_id){
+function getUserCommandCount($user_id, $limit = NULL){
     global $StatDB;
-    $result = $StatDB->query("SELECT command, count FROM record WHERE user_id={$user_id} ORDER BY count DESC");
+    $result = $StatDB->query("SELECT command, count FROM record WHERE user_id={$user_id} ORDER BY count DESC".($limit===NULL?'':' LIMIT '.abs($limit)));
     while(($row = $result->fetchArray()) && ($row !== false)){
         $text.="{$row['command']} {$row['count']}\n";
     }
-    return $text;
+    return rtrim($text);
 }
 
 ?>

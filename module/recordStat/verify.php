@@ -3,7 +3,6 @@
 global $User_id;
 loadModule('credit.tools');
 
-if(fromGroup())leave(); //禁止在群内进行验证
 switch(trim(getData('recordStat/'.$User_id))){
     case 'cancel':
         setData('recordStat/'.$User_id, 'true');
