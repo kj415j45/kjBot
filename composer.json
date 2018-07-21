@@ -27,7 +27,8 @@
         "lcobucci/jwt": "^3.2",
         "linfo/linfo": "^4.0",
         "nelexa/zip": "^3.1",
-        "php-http/guzzle6-adapter": "^1.1"
+        "php-http/guzzle6-adapter": "^1.1",
+        "statickidz/php-google-translate-free": "^1.0"
     },
     "scripts": {
         "post-root-package-install": [

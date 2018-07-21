@@ -5,6 +5,7 @@ function allowRecord($user_id){
 
 function addCommandCount($user_id, $command){
     global $StatDB;
+    if($user_id == config('bot'))return;
     if(allowRecord($user_id)){ //如果用户同意记名记录
         $row = getCommandCount($user_id, $command);
         if($row === false){
