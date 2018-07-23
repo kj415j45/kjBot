@@ -4,14 +4,23 @@ global $Queue;
 loadModule('pixiv.tools');
 
 do{
-    $iID = (int)nextArg();
+    $iID = nextArg();
 
     if($iID==NULL)break;
 
-    $pixiv = getIllustInfoByID($iID);
+    if(preg_match('/(\d+)_(\d+)/', $iID, $result)){ //如果给出的是 manga ID 格式
+        $Queue[]= sendMaster(var_export($pixiv, true));
+        $pixiv = getIllustInfoByID($result[1]);
+        $img = getIllustImgstr($pixiv, $result[2]);
+        
+    }else{
+        $pixiv = getIllustInfoByID($iID);
+        $img = getIllustImgstr($pixiv);
+    }
     $tags = implode(' ', $pixiv->tags);
-    $img = getIllustImgstr($pixiv);
+
     
+
     $msg=<<<EOT
 画师ID：{$pixiv->userId}
 标签：{$tags}
