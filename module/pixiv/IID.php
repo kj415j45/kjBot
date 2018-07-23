@@ -9,7 +9,6 @@ do{
     if($iID==NULL)break;
 
     if(preg_match('/(\d+)_(\d+)/', $iID, $result)){ //如果给出的是 manga ID 格式
-        $Queue[]= sendMaster(var_export($pixiv, true));
         $pixiv = getIllustInfoByID($result[1]);
         $img = getIllustImgstr($pixiv, $result[2]);
         
@@ -18,8 +17,6 @@ do{
         $img = getIllustImgstr($pixiv);
     }
     $tags = implode(' ', $pixiv->tags);
-
-    
 
     $msg=<<<EOT
 画师ID：{$pixiv->userId}
