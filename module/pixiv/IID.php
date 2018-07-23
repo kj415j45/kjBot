@@ -23,9 +23,9 @@ EOT;
     $msg.=sendImg($img);
     
     if($pixiv->xRestrict === 1){
-        $Queue[]= sendPM($msg);
+        $Queue[]= sendPM($msg, false, true); //异步发送加快处理速度
     }else{
-        $Queue[]= sendBack($msg);
+        $Queue[]= sendBack($msg, false, true);
     }
 
 }while($iID!==NULL);
