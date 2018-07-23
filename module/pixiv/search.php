@@ -2,6 +2,7 @@
 
 global $Queue, $Event;
 loadModule('pixiv.tools');
+global $pixivCookieHeader;
 use kjBot\SDK\CQCode;
 
 $page = 1;
@@ -31,13 +32,7 @@ $webStr = 'https://www.pixiv.net/search.php?type=illust'
 .'&word='.$word
 ;
 
-$webHeader = [
-    "http" => [
-        "header" => 'cookie: PHPSESSID='.config('Pixiv_Session').';' //通过指明 Session ID 获得某些图
-    ]
-];
-
-$web = file_get_contents($webStr, false, stream_context_create($webHeader));
+$web = file_get_contents($webStr, false, stream_context_create($pixivCookieHeader));
 
 if($web===false)leave('无法打开 Pixiv');
 
