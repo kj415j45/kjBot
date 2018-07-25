@@ -6,7 +6,33 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 Image::configure(array('driver' => 'imagick'));
 
-$withMeText = (nextArg()=='-withMe');
+$withMeText = false;
+
+do{
+    $arg = nextArg();
+    switch($arg){
+        case '-withMe':
+            $withMeText = true;
+            break;
+        case '-osu':
+        case '-std':
+            $mode = 'osu';
+            break;
+        case '-taiko':
+            $mode = 'taiko';
+            break;
+        case '-ctb':
+        case '-fruit':
+        case '-fruits':
+            $mode = 'fruits';
+            break;
+        case '-mania':
+            $mode = 'mania';
+            break;
+        default:
+
+    }
+}while($arg !== NULL);
 
 $osuid = getOsuID($Event['user_id']);
 
@@ -16,8 +42,7 @@ if($osuid == ''){
     $osuid = urlencode($osuid);
 }
 
-
-$web = file_get_contents('https://osu.ppy.sh/users/'.$osuid);
+$web = file_get_contents('https://osu.ppy.sh/users/'.$osuid.'/'.$mode);
 
 $target = '<script id="json-user" type="application/json">';
 
@@ -36,6 +61,7 @@ $exo2_italic = $here.'Exo2-Italic.ttf';
 $exo2_bold = $here.'Exo2-Bold.ttf';
 $yahei = $here.'Yahei.ttf';
 $white = '#ffffff';
+$mode = $mode??$user->playmode;
 $badges = $user->badges;
 $badge = $badges[rand(0, count($badges)-1)];
 $flag = file_exists($here."flags/{$user->country->code}.png")?($here."flags/{$user->country->code}.png"):($here.'flags/__.png');
@@ -72,10 +98,10 @@ $img->resize(1000, 350)
 if($badge!=NULL)$img->insert(Image::make($badge->image_url), 'top-left', 40, 168); //插入狗牌
 if($user->is_supporter){
     $img->insert(Image::make($here.'heart.png')->resize(28, 28), 'top-left', 170, 223) //插入支持者标志
-        ->insert(Image::make($here."modes/{$user->playmode}.png")->resize(28, 28), 'top-left', 210, 223) //插入模式标志
+        ->insert(Image::make($here."modes/{$mode}.png")->resize(28, 28), 'top-left', 210, 223) //插入模式标志
         ;
 }else{
-    $img->insert(Image::make($here."modes/{$user->playmode}.png")->resize(28, 28), 'top-left', 170, 223); //插入模式标志
+    $img->insert(Image::make($here."modes/{$mode}.png")->resize(28, 28), 'top-left', 170, 223); //插入模式标志
 }
 $img->insert(Image::make($flag)->resize(30, 20), 'top-left', 170, 310) //插入国旗
     ->insert(Image::canvas(280, 323)->fill([0, 0, 0, 0.3]), 'top-left', 670, 27) //绘制右侧暗化
