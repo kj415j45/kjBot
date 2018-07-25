@@ -180,9 +180,9 @@ function imageFont($file = 1, $size = 12, $color = '#000000', $align = 'left', $
 function drawScore($recent, $map, $u){
     Image::configure(array('driver' => 'imagick'));
 
-    $exo2 = '/usr/share/fonts/truetype/exo2/exo2.ttf';
-    $exo2b = '/usr/share/fonts/truetype/exo2/exo2-bold.ttf';
     $here = __DIR__.'/';
+    $exo2 = $here.'Exo2-Regular.ttf';
+    $exo2b = $here.'Exo2-Bold.ttf';
     $venera = $here.'Venera.ttf';
     $blue = '#44AADD';
     $gray = '#AAAAAA';
