@@ -113,7 +113,7 @@ function getSSPP($map, $stat){
 }
 
 function get_user_recent($k, $u, $m = OsuMode::std){
-    $u=urlencode($u);
+    $u=OsuUsernameEscape($u);
     $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_recent?k={$k}&u={$u}&m={$m}"), true)[0];
     if(NULL === $result){
         throw new \Exception('玩家最近没有成绩');
@@ -122,7 +122,7 @@ function get_user_recent($k, $u, $m = OsuMode::std){
 }
 
 function get_user_best($k, $u, $bp, $m = OsuMode::std){
-    $u=urlencode($u);
+    $u=OsuUsernameEscape($u);
     $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user_best?k={$k}&u={$u}&limit={$bp}&m={$m}"), true)[$bp-1];
     if(NULL === $result){
         throw new \Exception('没有这个bp');
@@ -131,7 +131,7 @@ function get_user_best($k, $u, $bp, $m = OsuMode::std){
 }
 
 function get_user($k, $u, $m = OsuMode::std){
-    $u=urlencode($u);
+    $u=OsuUsernameEscape($u);
     $result = json_decode(file_get_contents("https://osu.ppy.sh/api/get_user?k={$k}&u={$u}&m={$m}"), true)[0];
     if(NULL === $result){
         throw new \Exception('无效的 osu! ID，请检查用户名是否正确（或者被 ban 了');
@@ -149,6 +149,10 @@ function get_map($id, $mod){
     $mods=getModString($mod);
     exec("curl https://osu.ppy.sh/osu/{$id} | oppai - -ojson ".(null!=$mods?"+{$mods}":''), $result);
     return array_merge($map, json_decode($result[0], true));
+}
+
+function OsuUsernameEscape($osuid){
+    return str_replace('+', '%20', urlencode($osuid));
 }
 
 function getOsuID($qq){
@@ -180,9 +184,9 @@ function imageFont($file = 1, $size = 12, $color = '#000000', $align = 'left', $
 function drawScore($recent, $map, $u){
     Image::configure(array('driver' => 'imagick'));
 
-    $exo2 = '/usr/share/fonts/truetype/exo2/exo2.ttf';
-    $exo2b = '/usr/share/fonts/truetype/exo2/exo2-bold.ttf';
     $here = __DIR__.'/';
+    $exo2 = $here.'Exo2-Regular.ttf';
+    $exo2b = $here.'Exo2-Bold.ttf';
     $venera = $here.'Venera.ttf';
     $blue = '#44AADD';
     $gray = '#AAAAAA';

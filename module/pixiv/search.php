@@ -28,7 +28,7 @@ if(fromGroup())$mode = 'safe';
 
 $webStr = 'https://www.pixiv.net/search.php?type=illust'
 .'&p='.$page
-.'&mode='.$mode
+.'&mode='.strtolower($mode)
 .'&word='.$word
 ;
 
