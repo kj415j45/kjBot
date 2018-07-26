@@ -29,18 +29,21 @@ do{
         case '-mania':
             $mode = 'mania';
             break;
+        case '-user':
+            $osuid = nextArg();
+            break;
         default:
 
     }
 }while($arg !== NULL);
 
-$osuid = getOsuID($Event['user_id']);
+$osuid = $osuid??getOsuID($Event['user_id']);
 
 if($osuid == ''){
     throw new \Exception('未绑定 osu!');
-}else{
-    $osuid = urlencode($osuid);
 }
+
+$osuid = OsuUsernameEscape($osuid);
 
 $web = file_get_contents('https://osu.ppy.sh/users/'.$osuid.'/'.$mode);
 
