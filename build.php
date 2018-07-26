@@ -6,6 +6,7 @@ exec("php composer.phar install");
 exec("mkdir storage\\");
 exec("mkdir storage\\data\\");
 exec("mkdir storage\\cache\\");
+fopen("storage/data/black.txt","a");
 $db = new SQLite3('storage/data/stat.db');
 
 $sql=<<<EOF
