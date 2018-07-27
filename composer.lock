@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "43def9e4c8aef32f5b38639e3565980c",
-    "packages": [
+    "content-hash": "a51104950e4f4211d3763381f04a7236",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "clue/stream-filter",
             "version": "v1.4.0",
@@ -311,16 +312,16 @@
         },
         {
             "name": "knplabs/github-api",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/php-github-api.git",
-                "reference": "1e404bffaad30a7acf631b67340757646efbbf71"
+                "reference": "31abea216314657904f8fd7a6a5516d47199399b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/1e404bffaad30a7acf631b67340757646efbbf71",
-                "reference": "1e404bffaad30a7acf631b67340757646efbbf71",
+                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/31abea216314657904f8fd7a6a5516d47199399b",
+                "reference": "31abea216314657904f8fd7a6a5516d47199399b",
                 "shasum": ""
             },
             "require": {
@@ -344,7 +345,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.8.x-dev"
+                    "dev-master": "2.9.x-dev"
                 }
             },
             "autoload": {
@@ -375,7 +376,7 @@
                 "gist",
                 "github"
             ],
-            "time": "2018-03-23T16:42:55+00:00"
+            "time": "2018-07-23T07:41:29+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -1169,16 +1170,16 @@
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v4.1.1",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "45cdcc8a96ef92b43a50723e6d1f5f83096e8cef"
+                "reference": "0aec9f9c5d2447ae7ea5ea31bc82f1d43f9a8a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/45cdcc8a96ef92b43a50723e6d1f5f83096e8cef",
-                "reference": "45cdcc8a96ef92b43a50723e6d1f5f83096e8cef",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/0aec9f9c5d2447ae7ea5ea31bc82f1d43f9a8a56",
+                "reference": "0aec9f9c5d2447ae7ea5ea31bc82f1d43f9a8a56",
                 "shasum": ""
             },
             "require": {
@@ -1219,17 +1220,17 @@
                 "configuration",
                 "options"
             ],
-            "time": "2018-05-31T10:17:53+00:00"
+            "time": "2018-07-07T16:00:36+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0"
+        "php": "^7.2",
+        "ext-sqlite3": "^7.2"
     },
     "platform-dev": []
 }

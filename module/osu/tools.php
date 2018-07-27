@@ -30,7 +30,7 @@ function praseMod($mod){
     if($mod & 4096)$list['SO']=1;
     if($mod & 8192)$list['AP']=1;
     if($mod & 16384){unset($list['SD']);$list['PF']=1;}
-    
+
     return $list;
 }
 
@@ -84,7 +84,7 @@ function getModImages($list){
 function getModImage($list){
     $modImages = getModImages($list);
     $countImg = count($modImages);
-    
+
     if($countImg === 0){
         return Image::canvas(1,1);
     }

@@ -144,7 +144,7 @@ function loadModule(string $module){
     }
 
     if(file_exists('../module/'.$moduleFile)){
-        if(config('recordStat', 'true')=='true'){
+        if(config('recordStat', 'true')){
             if(strpos($module, '.tools')===false && strpos($module, 'recordStat')===false){ //防止记录工具类模块
                 global $Event;
                 addCommandCount($Event['user_id'], $module);
@@ -253,7 +253,7 @@ function leave($msg = '', $code = 0){
  */
 function inBlackList($qq):bool{
     $blackList = getData('black.txt');
-    if($blackList === false)leave('无法打开黑名单');
+    if($blackList === false)return false; //无法打开黑名单时不再抛异常
     if(strpos($blackList, ''.$qq) !== false){
         return true;
     }else{
