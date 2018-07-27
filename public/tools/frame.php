@@ -253,7 +253,7 @@ function leave($msg = '', $code = 0){
  */
 function inBlackList($qq):bool{
     $blackList = getData('black.txt');
-    if($blackList === false)leave('无法打开黑名单');
+    if($blackList === false)return false; //无法打开黑名单时不再抛异常
     if(strpos($blackList, ''.$qq) !== false){
         return true;
     }else{
