@@ -1,11 +1,11 @@
 API=127.0.0.1:5700
 token=
-prefix=!
+prefix="!"
 master=919815238
 bot=2839098896
 allowFriends=true
 allowGroups=true
-WelcomeMsg=感谢您添加 kjBot 为好友，发送 !help 查看帮助列表
+WelcomeMsg="感谢您添加 kjBot 为好友，发送 !help 查看帮助列表"
 ;DEBUG=true
 DebugListen=919815238
 ;Listen=
