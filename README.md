@@ -54,7 +54,6 @@ php build.php
 如果你需要试用 kjBot 的全部功能，请继续运行 `php composer.phar install`
 
 仅作为框架使用时，在确保 module 与 middleWare 文件夹下没有你的文件后：`composer run-script framework-only`
-然后重建 module 文件夹与 middleWare/Chain.php 文件。
 
 ### 入门
 
