@@ -102,6 +102,7 @@ $img->resize(1000, 350)
     ->insert(Image::canvas(1000, 350)->fill([0, 0, 0, 0.5])) //背景暗化50%
     ->insert($avatar->resize(110, 110), 'top-left', 40, 220) //插入头像
     ->text($user->username, 170, 256, imageFont($exo2_italic, 24, $white, 'left', 'top')) //插入用户名
+    ->text($user->title, 170, 285, imageFont($exo2_italic, 15, $white, 'left', 'top')) //插入title
     ;
 if($badge!=NULL)$img->insert(Image::make($badge->image_url), 'top-left', 40, 168); //插入狗牌
 if($user->is_supporter){
