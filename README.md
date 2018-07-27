@@ -37,19 +37,24 @@ kjBot 是一个轻量级多功能的酷Q机器人框架。
 如果你安装有 composer
 ```sh
 mkdir kjBot/
-composer create-project kj415j45/kjbot ./kjBot
+composer create-project --no-dev kj415j45/kjbot ./kjBot
 cd kjBot/
-./build.sh
+php build.php
 ```
 
 如果没有
 ```sh
 git clone https://github.com/kj415j45/kjBot.git
 cd kjBot/
-./build.sh
+php build.php
 ```
 
-仅作为框架使用时请清除 `composer.json` 内的 `require` 以及 `module/`、`middleWare/` 文件夹内的全部内容。
+打开 `config.ini`，根据你的实际情况修改。
+
+如果你需要试用 kjBot 的全部功能，请继续运行 `php composer.phar install`
+
+仅作为框架使用时，在确保 module 与 middleWare 文件夹下没有你的文件后：`composer run-script framework-only`
+然后重建 module 文件夹与 middleWare/Chain.php 文件。
 
 ### 入门
 
