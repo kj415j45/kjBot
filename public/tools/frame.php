@@ -144,7 +144,7 @@ function loadModule(string $module){
     }
 
     if(file_exists('../module/'.$moduleFile)){
-        if(config('recordStat', 'true')=='true'){
+        if(config('recordStat', 'true')){
             if(strpos($module, '.tools')===false && strpos($module, 'recordStat')===false){ //防止记录工具类模块
                 global $Event;
                 addCommandCount($Event['user_id'], $module);

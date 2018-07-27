@@ -6,7 +6,7 @@ use kjBot\SDK\CQCode;
 use kjBot\Frame\MessageSender;
 
 //全局变量区
-$Config = parse_ini_file('../config.ini', false, INI_SCANNER_RAW);
+$Config = parse_ini_file('../config.ini', false);
 $Event = json_decode(file_get_contents('php://input'), true);
 $Event['message'] = CQCode::DecodeCQCode($Event['message']);
 $User_id = $Event['user_id'];
