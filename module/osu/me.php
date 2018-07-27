@@ -70,6 +70,11 @@ $badge = $badges[rand(0, count($badges)-1)];
 $flag = file_exists($here."flags/{$user->country->code}.png")?($here."flags/{$user->country->code}.png"):($here.'flags/__.png');
 $stats_key = imageFont($yahei, 12, $white);
 $statics = $user->statistics;
+try{
+    $avatar = Image::make('https://a.ppy.sh/'.$user->id);
+}catch(\Exception $e){
+    $avatar = Image::make($here.'avatar-guest.png');
+}
 $playtime = [
     'hours' => sprintf('%d', $statics->play_time/3600),
     'minutes' => sprintf('%d', ($statics->play_time%3600)/60),
@@ -95,7 +100,7 @@ $grade = [
 $img = Image::make($user->cover_url);
 $img->resize(1000, 350)
     ->insert(Image::canvas(1000, 350)->fill([0, 0, 0, 0.5])) //背景暗化50%
-    ->insert(Image::make('https://a.ppy.sh/'.$user->id)->resize(110, 110), 'top-left', 40, 220) //插入头像
+    ->insert($avatar->resize(110, 110), 'top-left', 40, 220) //插入头像
     ->text($user->username, 170, 256, imageFont($exo2_italic, 24, $white, 'left', 'top')) //插入用户名
     ;
 if($badge!=NULL)$img->insert(Image::make($badge->image_url), 'top-left', 40, 168); //插入狗牌
