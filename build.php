@@ -3,9 +3,9 @@ file_put_contents("composer-installer", fopen("https://getcomposer.org/installer
 exec("php composer-installer");
 exec("php composer.phar install");
 
-exec("mkdir storage\\");
-exec("mkdir storage\\data\\");
-exec("mkdir storage\\cache\\");
+$here = __DIR__.'/';
+mkdir($here.'storage/data', 0777, true);
+mkdir($here.'storage/cache', 0777, true);
 fopen("storage/data/black.txt","a");
 $db = new SQLite3('storage/data/stat.db');
 
