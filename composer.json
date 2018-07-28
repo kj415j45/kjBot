@@ -48,6 +48,7 @@
         "optimize-autoloader": true
     },
     "require-dev": {
+        "ext-json": "^1.6",
         "intervention/image": "^2.4",
         "knplabs/github-api": "^2.9",
         "lcobucci/jwt": "^3.2",
