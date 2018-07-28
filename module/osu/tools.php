@@ -44,11 +44,11 @@ function ACCof($m){
 
 function getBG($map){
     try{
-        $bg = Image::make('https://bloodcat.com/osu/i/'.$map)->resize(1280, 720);
+        $bg = Image::make('https://bloodcat.com/osu/i/'.$map);
     }catch(\Exception $e){
-        return Image::make(__DIR__.'/bg.jpg')->resize(1280, 720); //Fallback 背景
+        return Image::make(__DIR__.'/bg.jpg'); //Fallback 背景
     }
-    return $bg;
+    return $bg->fit(1280, 720);
 }
 
 function getModString($mod){
