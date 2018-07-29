@@ -1,8 +1,8 @@
 <?php
 
+loadModule('osu.tools');
 global $Queue, $Event, $Command, $osu_api_key;
 use kjBot\SDK\CQCode;
-loadModule('osu.tools');
 
 $length = strpos($Event['message'], "\r");
 if(false===$length)$length=strlen($Event['message']);
