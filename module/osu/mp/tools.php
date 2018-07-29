@@ -23,6 +23,8 @@ function parseEvent($event, $users){
             return $time." {$users[$event->user_id]->username} 加入了房间";
         case 'host-changed':
             return $time." {$users[$event->user_id]->username} 成为房主";
+        case 'player-kicked':
+            return $time." {$users[$event->user_id]->username} 被踢出房间";
         case 'player-left':
             return $time." {$users[$event->user_id]->username} 离开了房间";
         case 'match-disbanded':
@@ -58,15 +60,22 @@ function drawMatchEvent($event, $users){
     }
     $img->insert(Image::canvas(960, 150)->fill([0, 0, 0, 0.5])) //暗化50%
         ->insert($teamTypeImg, 'top-left', 910, 100)
-        ->text("{$startTime} - {$endTime}   {$game->mode}   {$game->scoring_type}", 10, 20, imageFont($exo2_italic, 14, $white))
         ->text($beatmap->beatmapset->title."[{$beatmap->version}]", 10, 120, imageFont($exo2_italic, 20, $white))
-        ->text($beatmap->beatmapset->artist, 10, 140, imageFont($exo2_italic, 14, $white))
-    ;
+        ->text($beatmap->beatmapset->artist, 10, 140, imageFont($exo2_italic, 14, $white));
+    if($scores==[]){
+        $img->text("{$startTime} - (match in progress)   {$game->mode}   {$game->scoring_type}", 10, 20, imageFont($exo2_italic, 14, $white));
+        return $img;
+    }
+    $img->text("{$startTime} - {$endTime}   {$game->mode}   {$game->scoring_type}", 10, 20, imageFont($exo2_italic, 14, $white));
     
     $eventResult = Image::canvas(960, 155 + 79*count($scores), 'rgb(238, 238, 238)')
         ->insert($img);
     $xIndex = 10;
     $yIndex = 155;
+
+    if($game->team_type == 'head-to-head')usort($scores, function($scoreA, $scoreB){
+        return $scoreB->score - $scoreA->score;
+    });
 
     foreach($scores as $score){
         $eventResult->insert(drawPlayerMatchScore($score, $users[$score->user_id], $game->mode), 'top-left', $xIndex, $yIndex);
@@ -110,6 +119,10 @@ function drawPlayerMatchScore($score, $user, $mode){
         ->text('100', 775, 65, $label_large)
         ->text(number_format($score->statistics->count_100), 800, 65, $number_medium)
     ;
+
+    if(!$score->multiplayer->pass){
+        $img->text('FAILED', 215, 28, imageFont($exo2_bold, 15, '#ed1221'));
+    }
 
     switch($mode){
         case 'mania':

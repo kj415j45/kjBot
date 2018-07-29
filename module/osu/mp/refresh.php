@@ -17,8 +17,11 @@ $users = getEventUsers($history->users);
 
 decCredit($User_id, count($events));
 
+$count = 0;
 foreach($events as $event){
     $Queue[]= sendBack(parseEvent($event, $users));
+    $count++;
+    if($event->detail->type == 'other' && $event->game->end_time == NULL){addCredit($User_id, count($events)-$count+1);break;}
     setData("osu/mp/{$User_id}", "{$matchID} {$event->id}");
     if($event->detail->type == 'match-disbanded'){
         unlink("../storage/data/osu/mp/{$User_id}");
