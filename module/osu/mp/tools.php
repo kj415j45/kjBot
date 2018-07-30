@@ -58,6 +58,7 @@ function drawMatchEvent($event, $users){
     }catch(\Exception $e){
         $img = Image::canvas(960, 150, '#888888');
     }
+    //TODO 添加MOD图标
     $img->insert(Image::canvas(960, 150)->fill([0, 0, 0, 0.5])) //暗化50%
         ->insert($teamTypeImg, 'top-left', 910, 100)
         ->text($beatmap->beatmapset->title."[{$beatmap->version}]", 10, 120, imageFont($exo2_italic, 20, $white))
@@ -96,10 +97,8 @@ function drawMatchEvent($event, $users){
             });break;
         case 'tag-coop':
         case 'tag-team-vs':
-        default:
+        default: //TODO 完成tag的排序方案
     }
-
-    
 
     foreach($scores as $score){
         $eventResult->insert(drawPlayerMatchScore($score, $users[$score->user_id], $game->mode), 'top-left', $xIndex, $yIndex);
@@ -128,6 +127,7 @@ function drawPlayerMatchScore($score, $user, $mode){
     $team = Image::make($here.$score->multiplayer->team.'.png')->resize(40, 74);
     $flag = Image::make($outside."flags/{$user->country_code}.png")->resize(30, 20);
 
+    //TODO 添加MOD图标
     $img->insert($team)
         ->text($user->username, 45, 28, imageFont($exo2_italic, 18, $blue))
         ->insert($flag, 'top-left', 45, 37)
