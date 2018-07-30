@@ -73,9 +73,33 @@ function drawMatchEvent($event, $users){
     $xIndex = 10;
     $yIndex = 155;
 
-    if($game->team_type == 'head-to-head')usort($scores, function($scoreA, $scoreB){
-        return $scoreB->score - $scoreA->score;
-    });
+    switch($game->team_type){
+        case 'head-to-head':
+            usort($scores, function($scoreA, $scoreB){
+                return $scoreB->score - $scoreA->score;
+            });break;
+        case 'team-vs':
+            foreach($scores as $score){
+                if($score->multiplayer->team == 'red')$redScore += $score->score;
+                if($score->multiplayer->team == 'blue')$blueScore += $score->score;
+            }
+            usort($scores, function($scoreA, $scoreB) use ($redScore, $blueScore){
+                if($scoreA->multiplayer->team == 'red' && $scoreB->multiplayer->team == 'blue'){
+                    if($redScore > $blueScore)return -1;
+                    else return 1;
+                }else if($scoreA->multiplayer->team ==      $scoreB->multiplayer->team){
+                    return $scoreB->score - $scoreA->score;
+                }else{
+                    if($redScore > $blueScore)return 1;
+                    else return -1;
+                }
+            });break;
+        case 'tag-coop':
+        case 'tag-team-vs':
+        default:
+    }
+
+    
 
     foreach($scores as $score){
         $eventResult->insert(drawPlayerMatchScore($score, $users[$score->user_id], $game->mode), 'top-left', $xIndex, $yIndex);
