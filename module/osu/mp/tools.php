@@ -111,7 +111,7 @@ function drawPlayerMatchScore($score, $user, $mode){
         ->text(number_format($score->max_combo), 540, 35, $number_medium)
         ->text('Accuracy', 655, 35, $label_small)
         ->text(sprintf('%.2f%%', $score->accuracy*100), 710, 35, $number_medium)
-        ->text(number_format($score->score), 820, 35, imageFont($exo2_italic, 25, $pink, 'right'))
+        ->text(number_format($score->score), 790, 35, imageFont($exo2_italic, 25, $pink, 'right'))
         ->text('miss', 875, 65, $label_large)
         ->text(number_format($score->statistics->count_miss), 905, 65, $number_medium)
         ->text('50', 830, 65, $label_large)
