@@ -6,11 +6,12 @@ loadModule('osu.mp.tools');
 global $Queue, $User_id;
 requireMaster();
 
+$limit = nextArg()??20;
 $data = getData("osu/mp/{$User_id}");
 if($data === false)leave('没有正在监听的mp');
 sscanf(trim(getData("osu/mp/{$User_id}")), '%d %d', $matchID, $lastEventID);
 
-$historyJson = file_get_contents("https://osu.ppy.sh/community/matches/{$matchID}/history?since={$lastEventID}");
+$historyJson = file_get_contents("https://osu.ppy.sh/community/matches/{$matchID}/history?after={$lastEventID}&limit={$limit}");
 $history = json_decode($historyJson);
 $events = $history->events;
 $users = getEventUsers($history->users);

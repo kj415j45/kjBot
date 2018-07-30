@@ -7,7 +7,7 @@ global $Queue, $User_id;
 requireMaster();
 
 $matchID = (int)nextArg();
-$historyJson = file_get_contents("https://osu.ppy.sh/community/matches/{$matchID}/history");
+$historyJson = file_get_contents("https://osu.ppy.sh/community/matches/{$matchID}/history?after=0&limit=1");
 if(false === $historyJson)leave('读取mp数据失败');
 
 decCredit($User_id, 10);
