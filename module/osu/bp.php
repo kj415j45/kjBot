@@ -11,7 +11,13 @@ do{
     }
     switch($arg){
         case '-user':
-            $user = nextArg();
+            $temp = nextArg();
+            if(parseQQ($temp)!==NULL){
+                $user = getOsuID(parseQQ($temp));
+                if($user=='')leave('指定的用户未绑定 osu!');
+            }else{
+                $user = $temp;
+            }
             break;
         case '-std':
             $mode = OsuMode::std;

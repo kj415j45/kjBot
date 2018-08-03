@@ -30,7 +30,13 @@ do{
             $mode = 'mania';
             break;
         case '-user':
-            $osuid = nextArg();
+            $temp = nextArg();
+            if(parseQQ($temp)!==NULL){
+                $osuid = getOsuID(parseQQ($temp));
+                if($osuid=='')leave('指定的用户未绑定 osu!');
+            }else{
+                $osuid = $temp;
+            }
             break;
         default:
 
