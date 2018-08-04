@@ -1,12 +1,13 @@
 <?php
 
-global $Event, $Queue;
+global $Event, $Queue, $User_id;
 loadModule('osu.tools');
 use Intervention\Image\ImageManagerStatic as Image;
 
 Image::configure(array('driver' => 'imagick'));
 
 $withMeText = false;
+$qq = $User_id;
 
 do{
     $arg = nextArg();
@@ -32,7 +33,8 @@ do{
         case '-user':
             $temp = nextArg();
             if(parseQQ($temp)!==NULL){
-                $osuid = getOsuID(parseQQ($temp));
+                $qq = parseQQ($temp);
+                $osuid = getOsuID($qq);
                 if($osuid=='')leave('指定的用户未绑定 osu!');
             }else{
                 $osuid = $temp;
@@ -43,7 +45,7 @@ do{
     }
 }while($arg !== NULL);
 
-$osuid = $osuid??getOsuID($Event['user_id']);
+$osuid = $osuid??getOsuID($qq);
 
 if($osuid == ''){
     throw new \Exception('未绑定 osu!');
