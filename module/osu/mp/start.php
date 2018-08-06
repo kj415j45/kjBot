@@ -4,7 +4,6 @@ loadModule('credit.tools');
 loadModule('osu.tools');
 loadModule('osu.mp.tools');
 global $Queue, $User_id;
-requireMaster();
 
 $matchID = (int)nextArg();
 $historyJson = file_get_contents("https://osu.ppy.sh/community/matches/{$matchID}/history?after=0&limit=1");

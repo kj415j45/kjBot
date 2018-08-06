@@ -4,9 +4,8 @@ loadModule('credit.tools');
 loadModule('osu.tools');
 loadModule('osu.mp.tools');
 global $Queue, $User_id;
-requireMaster();
 
-$limit = nextArg()??20;
+$limit = nextArg()??5;
 $data = getData("osu/mp/{$User_id}");
 if($data === false)leave('没有正在监听的mp');
 sscanf(trim(getData("osu/mp/{$User_id}")), '%d %d', $matchID, $lastEventID);
