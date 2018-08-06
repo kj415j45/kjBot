@@ -58,7 +58,7 @@ $web = file_get_contents('https://osu.ppy.sh/users/'.$osuid.'/'.$mode);
 $target = '<script id="json-user" type="application/json">';
 
 $start = strpos($web, $target);
-if($start === false)leave('指定的用户不存在');
+if($start === false)leave('指定的用户不存在（或者被ban了');
 
 $end = strpos(substr($web, $start), '</script>');
 
