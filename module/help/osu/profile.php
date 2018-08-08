@@ -5,7 +5,7 @@ global $Queue;
 $msg=<<<EOT
 展示你的 osu! 个人资料
 用法：
-!osu.me [...]
+!osu.rofile [...]
 
 参数列表：
 -user "用 户 名"    查看别人的资料
