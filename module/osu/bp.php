@@ -1,7 +1,9 @@
 <?php
 
-global $Event, $Queue, $osu_api_key;
+global $Event, $Queue, $osu_api_key, $User_id;
 loadModule('osu.tools');
+
+$qq = $User_id;
 
 do{
     $arg = nextArg();
@@ -11,7 +13,14 @@ do{
     }
     switch($arg){
         case '-user':
-            $user = nextArg();
+            $temp = nextArg();
+            if(parseQQ($temp)!==NULL){
+                $qq = parseQQ($temp);
+                $user = getOsuID($qq);
+                if($user=='')leave('指定的用户未绑定 osu!');
+            }else{
+                $user = $temp;
+            }
             break;
         case '-std':
             $mode = OsuMode::std;
@@ -30,7 +39,7 @@ do{
     }
 }while($arg !== NULL);
 
-$osuUser = getOsuID($Event['user_id']);
+$osuUser = getOsuID($qq);
 if($osuUser !== ''){
     $u = $user??$osuUser;
 }else{
@@ -40,7 +49,7 @@ if($osuUser !== ''){
         $u = $user;
     }
 }
-$osuMode = rtrim(getData("osu/mode/{$Event['user_id']}"));
+$osuMode = rtrim(getData("osu/mode/{$qq}"));
 $m = $mode??$osuMode;
 
 $bp = get_user_best($osu_api_key, $u, $x, $m);

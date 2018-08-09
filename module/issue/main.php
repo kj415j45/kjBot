@@ -37,6 +37,6 @@ $result = $github->api('issue')->create('kj415j45', 'kjBot', [
 ]);
 
 $Queue[]= sendBack('Issue 创建成功！'.$result['html_url']);
-$Queue[]= sendMaster($Event['user_id'].' 创建了新 issue '.$result['html_url'])
+$Queue[]= sendMaster($Event['user_id'].' 创建了新 issue '.$result['html_url']."\n".var_export($Event, true));
 
 ?>

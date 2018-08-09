@@ -53,6 +53,7 @@
         "knplabs/github-api": "^2.9",
         "lcobucci/jwt": "^3.2",
         "linfo/linfo": "^4.0",
+        "meyfa/php-svg": "^0.9.0",
         "nelexa/zip": "^3.1",
         "php-http/guzzle6-adapter": "^1.1",
         "statickidz/php-google-translate-free": "^1.0"
