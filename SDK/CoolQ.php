@@ -381,7 +381,7 @@ class CoolQ{
             case 1:
                 return NULL;
             default:
-                throw new \Exception("Query Failed", $result['retcode']);
+                throw new \Exception("Query Failed", $result->retcode);
         }
     }
 
