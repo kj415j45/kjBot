@@ -9,6 +9,20 @@ $groupList = $CQ->getGroupList();
 $whiteList = file_get_contents('https://raw.githubusercontent.com/kjBot-Dev/ADwhitelist/master/whitelist.json');
 if(false === $whiteList)leave('打开白名单失败，终止');
 
+$prefix=<<<EOT
+广告：
+----------
+
+EOT;
+
+$suffix=<<<EOT
+
+----------
+kjBot 正在接受广告推送请求，5元一次。屏蔽 1元/月。详情联系：kjbot@kj415j45.space
+EOT;
+
+$Text = $prefix.$Text.$suffix;
+
 $whiteList = json_decode($whiteList)->list;
 $expireDay = [];
 $success = 0;
