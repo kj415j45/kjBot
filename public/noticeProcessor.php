@@ -11,6 +11,21 @@ switch($Event['notice_type']){
             $Queue[]= sendBack('kjBot 已入驻本群，发送 '.config('prefix', '!').'help 查看帮助');
         }
         break;
+    case 'group_decrease':
+        if($Event['sub_type']=='kick_me'){
+            $Queue[]= sendMaster('Being kicked from group '.$Event['group_id'].' by '.$Event['operator_id']);
+        }
+        break;
+    case 'group_admin':
+        if($Event['user_id'] == config('bot')){
+            if($Event['sub_type']=='set'){
+                $prefix = 'Get ';
+            }elseif($Event['sub_type']=='unset'){
+                $prefix = 'Lost ';
+            }
+            $Queue[]= sendMaster($prefix.'admin in group '.$Event['group_id']);
+        }
+        break;
     default:
         
 }
