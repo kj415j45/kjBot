@@ -252,13 +252,15 @@ function leave($msg = '', $code = 0){
  * @return bool
  */
 function inBlackList($qq):bool{
-    $blackList = getData('black.txt');
+    $blackList = getData('black.json');
     if($blackList === false)return false; //无法打开黑名单时不再抛异常
-    if(strpos($blackList, ''.$qq) !== false){
-        return true;
-    }else{
-        return false;
+    $blackList = json_decode($blackList)->list;
+    foreach($blackList as $person){
+        if($qq == $person->id){
+            return true;
+        }
     }
+    return false;
 }
 
 function block($qq){
