@@ -6,7 +6,10 @@ use kjBot\SDK\CQCode;
 
 loadModule('credit.tools');
 
-$QQ = parseQQ(nextArg());
+$QQ = nextArg();
+if(!(preg_match('/\d+/', $QQ, $match) && $match[0] == $QQ)){
+    $QQ = parseQQ($QQ);
+}
 $credit = (int)nextArg();
 setCredit($QQ, $credit);
 
