@@ -29,7 +29,7 @@ Up:   {$uptime['text']}
 EOT;
 
 $opcache = opcache_get_status(false);
-if($Opcache!==false){
+if(is_array($opcache)){
     $opcStatus = $opcache['opcache_statistics'];
     $opcMemWasteRate = sprintf('%.2f%%', $opcache['memory_usage']['current_wasted_percentage']*100);
     $opcHitRate = sprintf('%.2f%%', $opcStatus['opcache_hit_rate']);
