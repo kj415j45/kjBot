@@ -17,7 +17,6 @@ do{
         $img = getIllustImgstr($pixiv);
     }
     $tags = implode(' ', $pixiv->tags);
-
     $msg=<<<EOT
 画师ID：{$pixiv->userId}
 标签：{$tags}
@@ -25,15 +24,12 @@ do{
 {$pixiv->illustTitle}
 
 EOT;
-    
     $msg.=sendImg($img);
-    
     if($pixiv->xRestrict === 1){
         $Queue[]= sendPM($msg, false, true); //异步发送加快处理速度
     }else{
         $Queue[]= sendBack($msg, false, true);
     }
-
 }while($iID!==NULL);
 
 
