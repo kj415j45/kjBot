@@ -13,7 +13,7 @@ $User_id = $Event['user_id'];
 $CQ = new CoolQ(config('API', '127.0.0.1:5700'), config('token', ''));
 $Queue = [];
 $MsgSender = new MessageSender($CQ);
-$Debug = ('true'===config('DEBUG', 'false'))?true:false;
+$Debug = config('DEBUG', false);
 $DebugListen = config('DebugListen', config('master'));
 $Command = [];
 $Text = '';
