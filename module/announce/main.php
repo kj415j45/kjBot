@@ -23,7 +23,7 @@ foreach($groupList as $group){
         $Queue[]= sendMaster("Query {$group->group_id} failed: ".$e->getCode());
     }
     if($error>5)leave('错误次数过多，终止');
-    //sleep(5); //5秒延迟
+    sleep(10); //10秒延迟
 }
 $groupCount = count($groupList);
 $Queue[]= sendMaster("目前共有 {$groupCount} 个群，成功 {$success} 个，异常原因失败 {$error} 个，被 {$silence} 个群禁言中");

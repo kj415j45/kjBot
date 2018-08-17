@@ -50,7 +50,7 @@ foreach($groupList as $group){
         $Queue[]= sendMaster("Query {$group->group_id} failed: ".$e->getCode());
     }
     if($error>5)leave('错误次数过多，终止');
-    //sleep(5); //5秒延迟
+    sleep(10); //10秒延迟
 }
 $groupCount = count($groupList);
 $whiteCount = $groupCount-$success-$error-$silence;
