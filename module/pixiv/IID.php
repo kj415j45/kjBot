@@ -16,12 +16,13 @@ do{
         $pixiv = getIllustInfoByID($iID);
         $img = getIllustImgstr($pixiv);
     }
-    $tags = implode(' ', $pixiv->tags);
+    $tags = getIllustTagsFromPixivJSON($pixiv);
     $msg=<<<EOT
 画师ID：{$pixiv->userId}
 标签：{$tags}
 
 {$pixiv->illustTitle}
+{$pixiv->illustComment}
 
 EOT;
     $msg.=sendImg($img);
