@@ -24,7 +24,7 @@ try{
 
     //调试
     if($Debug && $Event['user_id'] == $DebugListen){
-        $Queue[]= sendMaster(var_export($Queue, true));
+        $Queue[]= sendMaster(var_export($Event, true)."\n\n".var_export($Queue, true));
     }
 
 }catch(\Exception $e){

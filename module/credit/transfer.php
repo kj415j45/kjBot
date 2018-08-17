@@ -4,7 +4,10 @@ global $Event, $Queue;
 loadModule('credit.tools');
 use kjBot\SDK\CQCode;
 
-$QQ = parseQQ(nextArg());
+$QQ = nextArg();
+if(!(preg_match('/\d+/', $QQ, $match) && $match[0] == $QQ)){
+    $QQ = parseQQ($QQ);
+}
 $transfer = abs((int)nextArg());
 transferCredit($Event['user_id'], $QQ, $transfer);
 

@@ -4,18 +4,21 @@ function getCredit($QQ){
     return (int)getData("credit/{$QQ}");
 }
 
-function setCredit($QQ, $credit){
+function setCredit($QQ, $credit, $set = false){
+    if($set)setData('credit.history', "* {$QQ} {$credit}\n", true);
     return setData("credit/{$QQ}", (int)$credit);
 }
 
 function addCredit($QQ, $income){
-    return setCredit($QQ, getCredit($QQ)+(int)$income);
+    setData('credit.history', "+ {$QQ} {$income}\n", true);
+    return setCredit($QQ, getCredit($QQ)+(int)$income, true);
 }
 
 function decCredit($QQ, $pay){
     $balance = getCredit($QQ);
     if($balance >= $pay){
-        return setCredit($QQ, (int)($balance-$pay));
+        setData('credit.history', "- {$QQ} {$pay}\n");
+        return setCredit($QQ, (int)($balance-$pay), true);
     }else{
         throw new \Exception('余额不足,还需要 '.($pay-$balance).' 个金币');
     }

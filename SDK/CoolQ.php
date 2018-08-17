@@ -306,10 +306,12 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
-    public function setRestart($clean_cache = false){
+    public function setRestart($clean_log = false, $clean_cache = false, $clean_event = false){
         $api = API::set_restart;
         $param = [
+            'clean_log' => $clean_log,
             'clean_cache' => $clean_cache,
+            'clean_event'=> $clean_event,
         ];
         return $this->query($api, $param);
     }
@@ -336,16 +338,26 @@ class CoolQ{
         return $this->query($api, $param);
     }
 
-    public function _getFriendList(){
+    public function _getFriendList($flat = false){
         $api = API::_get_friend_list;
-        $param = [];
+        $param = [
+            'flat' => $flat,
+        ];
         return $this->query($api, $param);
     }
 
-    public function _getGroupInfo($flat = false){
+    public function _getGroupInfo($group_id){
         $api = API::_get_group_info;
         $param = [
-            'flat' => $flat,
+            'group_id' => $group_id,
+        ];
+        return $this->query($api, $param);
+    }
+
+    public function _get_vip_info($user_id){
+        $api = API::_get_vip_info;
+        $param = [
+            'user_id' => $user_id,
         ];
         return $this->query($api, $param);
     }
@@ -381,7 +393,7 @@ class CoolQ{
             case 1:
                 return NULL;
             default:
-                throw new \Exception("Query Failed", $result['retcode']);
+                throw new \Exception("Query Failed", $result->retcode);
         }
     }
 
