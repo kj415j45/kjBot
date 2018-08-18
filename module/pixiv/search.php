@@ -55,6 +55,7 @@ $pixiv = $result[$index++];
 $pixiv = getIllustInfoByID($pixiv->illustId);
 $tags = getIllustTagsFromPixivJSON($pixiv);
 $img = getIllustImgstr($pixiv);
+$pixiv->illustComment = str_replace('<br />', "\n", $pixiv->illustComment);
 
 $msg=<<<EOT
 该关键字共有 {$count[1]} 幅作品，这是第 {$page} 页第 {$index} 幅

@@ -17,6 +17,7 @@ do{
         $img = getIllustImgstr($pixiv);
     }
     $tags = getIllustTagsFromPixivJSON($pixiv);
+    $pixiv->illustComment = str_replace('<br />', "\n", $pixiv->illustComment);
     $msg=<<<EOT
 画师ID：{$pixiv->userId}
 标签：{$tags}
