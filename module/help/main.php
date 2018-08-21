@@ -7,7 +7,7 @@ $msg=<<<EOT
 !help.{命令}[.下一级命令]
 获得特定命令的帮助
 可用命令：
-checkin credit issue osu pixiv recordStat roll search sleep time trans unsleep version voice
+about checkin credit issue osu pixiv recordStat roll search sleep time trans unsleep version voice
 EOT;
 
 $Queue[]= sendBack($msg);
