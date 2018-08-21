@@ -68,7 +68,7 @@ $msg=<<<EOT
 
 {$pixiv->illustTitle}
 {$pixiv->illustComment}
-[CQ:image,file={$pixiv->urls->original}]
+[CQ:image,file={$pixiv->urls->regular}]
 EOT;
 
 $Queue[]= sendBack($msg);
