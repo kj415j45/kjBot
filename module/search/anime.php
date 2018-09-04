@@ -1,0 +1,2 @@
+<?php
+loadModule('whatanime');
