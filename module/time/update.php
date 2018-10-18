@@ -7,7 +7,7 @@ if(false == $web)throw new \Exception('Update failed, no data found');
 preg_match_all('{https:\\\/\\\/img\.moegirl\.org\\\/common\\\/\S{1}\\\/\S{2}\\\/[%a-zA-Z0-9_]*\.mp3}', $web, $result);
 $start=count($result[0])-24-1;
 for($i=$start, $j=0; $i<$start+24 ; $i++, $j++){
-	$target = str_replace("\\","",$result[0][$i]);
+    $target = str_replace("\\","",$result[0][$i]);
     setData("time/{$j}.mp3", file_get_contents($target));
     $Queue[]= sendPM(CQCode::Record('base64://'.base64_encode(getData("time/{$j}.mp3"))));
 }
