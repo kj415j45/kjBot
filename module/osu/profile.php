@@ -107,7 +107,7 @@ $grade = [
 ];
 //开始绘图
 $img = Image::make($user->cover_url);
-$img->resize(1000, 350)
+$img->fit(1000, 350)
     ->insert(Image::canvas(1000, 350)->fill([0, 0, 0, 0.5])) //背景暗化50%
     ->insert($avatar->resize(110, 110), 'top-left', 40, 220) //插入头像
     ->text($user->username, 170, 256, imageFont($exo2_italic, 24, $white, 'left', 'top')) //插入用户名
@@ -131,7 +131,7 @@ $img->insert(Image::make($flag)->resize(30, 20), 'top-left', 170, 310) //插入�
 $yIndex = 120;
 foreach($stat as $key => $value){
     $img->text($key, 690, $yIndex, $stats_key);
-    $img->text($value, 930, $yIndex, imageFont($exo2_bold, 16, $white, 'right'));
+    $img->text($value, 930, $yIndex+2, imageFont($exo2_bold, 16, $white, 'right'));
     $yIndex+=20;
 }
 $img->text(sprintf('%.2f', $statics->pp), 690, 280, imageFont($exo2_bold, 40, $white));
