@@ -3,7 +3,7 @@
 loadModule('credit.tools');
 global $Text, $Queue, $User_id;
 
-$whatanimeBase = 'https://whatanime.ga/api';
+$whatanimeBase = 'https://trace.moe/api';
 $token = config('whatanime_token');
 if(!preg_match('/url=(\S*)[,\]]/', $Text, $match))leave('解析图片失败');
 $image = file_get_contents($match[1]);
@@ -13,11 +13,10 @@ $opt = [
     'http' => [
         'method' => 'POST',
         'header' => <<<EOT
-Content-Type: application/x-www-form-urlencoded; charset=UTF-8
-Host: whatanime.ga
+Content-Type: application/json
 EOT
 ,
-        'content' => 'image='.$b64Image,
+        'content' => "{\"image\": \"${b64Image}\"}",
     ]
 ];
 
