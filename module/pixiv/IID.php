@@ -28,7 +28,6 @@ do{
 {$pixiv->illustComment}
 [CQ:image,file={$imgURL}]
 EOT;
-    setData('test.txt', var_export($pixiv, true));
     if($pixiv->xRestrict === 1){
         $Queue[]= sendPM($msg, false, true); //异步发送加快处理速度
     }else{
