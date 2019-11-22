@@ -19,8 +19,11 @@ do{
         case '-mode':
             $mode = nextArg();
             break;
+        case '-like':
+            $word.= nextArg().urlencode('users入り ');
+            break;
         default:
-            $word.= $arg??'';
+            $word.= $arg?urlencode($arg.' '):'';
     }
 }while($arg !== NULL);
 
@@ -54,20 +57,19 @@ if(isset($target) && 1<=$target && $target<=count($result)){
 $pixiv = $result[$index++];
 $pixiv = getIllustInfoByID($pixiv->illustId);
 $tags = getIllustTagsFromPixivJSON($pixiv);
-$img = getIllustImgstr($pixiv);
+$pixiv->illustComment = strip_tags(str_replace('<br />', "\n", $pixiv->illustComment));
 
 $msg=<<<EOT
 该关键字共有 {$count[1]} 幅作品，这是第 {$page} 页第 {$index} 幅
-插画ID：{$pixiv->illustId}
+插画ID：{$pixiv->illustId} 共 {$pixiv->pageCount} P
 画师ID：{$pixiv->userId}
 标签：{$tags}
+收藏：{$pixiv->bookmarkCount} 喜欢：{$pixiv->likeCount} 浏览：{$pixiv->viewCount}
 
 {$pixiv->illustTitle}
 {$pixiv->illustComment}
-
+[CQ:image,file={$pixiv->urls->regular}]
 EOT;
-
-$msg.=sendImg($img);
 
 $Queue[]= sendBack($msg);
 

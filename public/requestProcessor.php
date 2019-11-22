@@ -13,7 +13,7 @@ switch($Event['request_type']){
                 break;
             case 'invite':
                 $CQ->setGroupAddRequest($Event['flag'], $Event['sub_type'], config('allowGroups'));
-                $Queue[]= sendMaster('Join Group '.$Event['group_id'].' by '.$Event['user_id']); //通知master
+                $Queue[]= sendMaster('Being invited to group '.$Event['group_id'].' by '.$Event['user_id']); //通知master
                 break;
             default:
         }

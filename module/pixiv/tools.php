@@ -7,16 +7,6 @@ $pixivCookieHeader = [
     ]
 ];
 
-function getIllustImgstr($pixiv, $page = NULL){
-    global $pixivCookieHeader;
-
-    $img = $pixiv->urls->original;
-    $imgHeader['http']['header']=$pixivCookieHeader['http']['header'].'referer: https://www.pixiv.net/member_illust.php?mode=medium&illust_id='.$pixiv->illustId."\n"; //伪造上级页面来源
-    $imgStr = file_get_contents($img, false, stream_context_create($imgHeader));
-
-    return $imgStr;
-}
-
 function getIllustInfoByID($iID){
     global $pixivCookieHeader;
     $web = file_get_contents('https://www.pixiv.net/member_illust.php?mode=medium&illust_id='.$iID, false, stream_context_create($pixivCookieHeader));
